@@ -2,12 +2,11 @@ import 'package:drinking_app/app/config/screen_handler.dart';
 import 'package:drinking_app/app/config/validate_field.dart';
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
-import 'package:drinking_app/app/presentation/controllers/login/login_binding.dart';
-import 'package:drinking_app/app/presentation/controllers/register/register_controller.dart';
+import 'package:drinking_app/app/presentation/controllers/register_controller.dart';
 import 'package:drinking_app/app/presentation/views/login_view.dart';
-import 'package:drinking_app/app/presentation/widgets/auth_links_shared_widget.dart';
+import 'package:drinking_app/app/core/utils/widgets/auth_links_shared_widget.dart';
 import 'package:drinking_app/app/presentation/widgets/text_form_field_widget.dart';
-import 'package:drinking_app/app/presentation/widgets/text_icon_btn_shared_widget.dart';
+import 'package:drinking_app/app/core/utils/widgets/text_icon_btn_shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -72,7 +71,7 @@ class RegisterView extends StatelessWidget {
                   ),
                   SizedBox(height: ScreenHandler.getScreenHeight(context) / 20),
                   const Text(
-                    "Registet account",
+                    "Register account",
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: appFont,
@@ -80,24 +79,27 @@ class RegisterView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  GetX<RegisterController>(builder: (controller) {
-                    if (controller.choiceRegisterSection.value == 1) {
-                      return RegisterInformationModel(
-                        formKey: formKey,
-                        controller: controller,
-                      );
-                    } else if (controller.choiceRegisterSection.value == 2) {
-                      return RegisterResidentialAddressModel(
-                        formKey: formKey,
-                        controller: controller,
-                      );
-                    } else {
-                      return RegisterWorkAdressModel(
-                        formKey: formKey,
-                        controller: controller,
-                      );
-                    }
-                  }),
+                  GetX<RegisterController>(
+                      init: RegisterController.instance,
+                      builder: (controller) {
+                        if (controller.choiceRegisterSection.value == 1) {
+                          return RegisterInformationModel(
+                            formKey: formKey,
+                            controller: controller,
+                          );
+                        } else if (controller.choiceRegisterSection.value ==
+                            2) {
+                          return RegisterResidentialAddressModel(
+                            formKey: formKey,
+                            controller: controller,
+                          );
+                        } else {
+                          return RegisterWorkAdressModel(
+                            formKey: formKey,
+                            controller: controller,
+                          );
+                        }
+                      }),
                 ],
               ),
             ),
@@ -214,7 +216,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeCallingNumber(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validatePhoneNumber(value);
+              return ValidateField.instance.validateField(value!);
             },
             initialValue: "",
           ),
@@ -228,7 +230,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeWhatsAppNumber(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validatePhoneNumber(value);
+              return ValidateField.instance.validateField(value!);
             },
             initialValue: "",
           ),
@@ -278,7 +280,6 @@ class RegisterInformationModel extends StatelessWidget {
             onClick: () {
               Get.to(
                 () => const LoginView(),
-                binding: LoginBinding.instnace,
               );
             },
             text: "Already have an account?",
@@ -439,7 +440,6 @@ class RegisterResidentialAddressModel extends StatelessWidget {
             onClick: () {
               Get.to(
                 () => const LoginView(),
-                binding: LoginBinding.instnace,
               );
             },
             text: "Already have an account?",
@@ -573,7 +573,9 @@ class RegisterWorkAdressModel extends StatelessWidget {
                   btnWidth: ScreenHandler.getScreenWidth(context) / 2,
                   btnColor: AppColor.color2,
                   btnRaduis: 12,
-                  onClick: () {},
+                  onClick: () {
+                    controller.onClickRegister(formKey);
+                  },
                   icon: Icons.navigate_next_outlined,
                   iconColor: Colors.black,
                 ),
@@ -585,7 +587,6 @@ class RegisterWorkAdressModel extends StatelessWidget {
             onClick: () {
               Get.to(
                 () => const LoginView(),
-                binding: LoginBinding.instnace,
               );
             },
             text: "Already have an account?",

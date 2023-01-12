@@ -1,48 +1,34 @@
+import 'package:drinking_app/app/domain/entities/residential_address.dart';
+import 'package:drinking_app/app/domain/entities/work_address.dart';
+
 class AuthEntity {
-  String? userName,
-      email,
-      password,
-      fullName,
-      date,
-      emiratesId,
-      nationality,
-      callingNumber,
-      whatsNumber,
-      emirateCity,
-      area,
-      street,
-      villaName,
-      type,
-      nameOfContact,
-      numberOfPerson,
-      workHouse,
-      contactPerson,
-      staff,
-      lamdMark,
-      passwod,
-      userId,
-      image;
+  String? fullName;
+  String? email;
+  String? password;
+  String? username;
+  String? birthdate;
+  String? emiratesID;
+  String? nationality;
+  String? emiratesCity;
+  String? area;
+  String? callNumber;
+  String? whatsappNumber;
+  WorkAddress? workAddress;
+  ResidentailAddress? residentailAddress;
 
   AuthEntity({
-    this.userId,
     this.fullName,
-    this.userName,
     this.email,
-    this.passwod,
-    this.image,
-    this.date,
-    this.emiratesId,
+    this.password,
+    this.username,
+    this.birthdate,
+    this.emiratesID,
     this.nationality,
-    this.callingNumber,
-    this.whatsNumber,
-    this.emirateCity,
+    this.emiratesCity,
     this.area,
-    this.street,
-    this.villaName,
-    this.type,
-    this.nameOfContact,
-    this.numberOfPerson,
-    this.workHouse,
-    this.contactPerson,
+    this.callNumber,
+    this.whatsappNumber,
+    this.workAddress,
+    this.residentailAddress,
   });
 }
