@@ -1,3 +1,4 @@
+import 'package:drinking_app/app/data/services/apis/auth_api_service.dart';
 import 'package:drinking_app/app/domain/entities/auth_entity.dart';
 import 'package:drinking_app/app/domain/repositories/i_auth_repository.dart';
 
@@ -6,6 +7,7 @@ class AuthRepositoryImp implements IAuthRepository {
       AuthRepositoryImp._internal();
   AuthRepositoryImp._internal();
   static AuthRepositoryImp get instance => _authRepositoryImp;
+
   @override
   Future<Map<String, dynamic>> checkIsLogin() {
     // TODO: implement checkIsLogin
@@ -31,9 +33,8 @@ class AuthRepositoryImp implements IAuthRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> login(AuthEntity authEntity) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> login(AuthEntity authEntity) async {
+    return await AuthApiService.instance.loginApiService(authEntity);
   }
 
   @override
@@ -43,9 +44,8 @@ class AuthRepositoryImp implements IAuthRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> register(AuthEntity authEntity) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> register(AuthEntity authEntity) async {
+    return await AuthApiService.instance.registerApiService(authEntity);
   }
 
   @override

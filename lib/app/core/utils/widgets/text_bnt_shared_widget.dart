@@ -23,7 +23,7 @@ class TextBtnSharedWidget extends StatelessWidget {
         height: btnHeight,
         width: btnWidth,
         padding: const EdgeInsets.all(12),
-        margin: const EdgeInsets.only(left: 15, right: 15),
+        margin: const EdgeInsets.only(left: 8, right: 8),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(btnRaduis),

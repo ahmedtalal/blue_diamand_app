@@ -11,15 +11,15 @@ class CurdApiHelper {
   CurdApiHelper._internal();
   static CurdApiHelper get instance => _curdApiHelper;
 
-  static const apiBaseUrl = "HERE > BASE_URL";
+  static const apiBaseUrl = "http://127.0.0.1:3000/api/";
   Dio _initDio() {
     Dio dio = Dio(
       BaseOptions(
         baseUrl: apiBaseUrl,
         contentType: "application/json",
-        headers: {
-          "XApiKey": "HERE > XAPIKEY",
-        },
+        // headers: {
+        //   "XApiKey": "HERE > XAPIKEY",
+        // },
       ),
     );
     if (apiBaseUrl.toLowerCase().startsWith('https') && !kIsWeb) {

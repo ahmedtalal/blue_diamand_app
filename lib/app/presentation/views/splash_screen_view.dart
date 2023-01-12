@@ -1,9 +1,8 @@
 import 'package:drinking_app/app/config/screen_handler.dart';
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
-import 'package:drinking_app/app/presentation/controllers/register/register_binding.dart';
 import 'package:drinking_app/app/presentation/views/register_view.dart';
-import 'package:drinking_app/app/presentation/widgets/text_bnt_shared_widget.dart';
+import 'package:drinking_app/app/core/utils/widgets/text_bnt_shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -80,7 +79,6 @@ class SplashScreenview extends StatelessWidget {
                 onClick: () {
                   Get.offAll(
                     () => const RegisterView(),
-                    binding: RegisterBindng.instance,
                   );
                 },
               ),

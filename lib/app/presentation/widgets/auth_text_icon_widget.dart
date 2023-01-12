@@ -28,8 +28,8 @@ class AuthTextIconBtnWidget extends StatelessWidget {
       child: Container(
         height: btnHeight,
         width: btnWidth,
-        padding: const EdgeInsets.all(12),
-        margin: const EdgeInsets.only(left: 15, right: 15),
+        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.only(left: 10, right: 10),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(btnRaduis),

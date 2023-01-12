@@ -2,11 +2,12 @@ import 'package:drinking_app/app/config/screen_handler.dart';
 import 'package:drinking_app/app/config/validate_field.dart';
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
-import 'package:drinking_app/app/presentation/controllers/login/login_controller.dart';
-import 'package:drinking_app/app/presentation/widgets/auth_links_shared_widget.dart';
+import 'package:drinking_app/app/presentation/controllers/login_controller.dart';
+import 'package:drinking_app/app/core/utils/widgets/auth_links_shared_widget.dart';
+import 'package:drinking_app/app/presentation/views/main_view.dart';
 import 'package:drinking_app/app/presentation/widgets/auth_text_icon_widget.dart';
 import 'package:drinking_app/app/presentation/widgets/text_form_field_widget.dart';
-import 'package:drinking_app/app/presentation/widgets/text_icon_btn_shared_widget.dart';
+import 'package:drinking_app/app/core/utils/widgets/text_icon_btn_shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -81,90 +82,95 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  GetX<LoginController>(builder: (controller) {
-                    if (controller.isLoading.value) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    return Form(
-                      key: formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const SizedBox(height: 20),
-                          const SizedBox(height: 10),
-                          TextFormFieldSharedWidget(
-                            label: "email",
-                            hint: "email",
-                            textType: TextInputType.emailAddress,
-                            prefIcon: Icons.email,
-                            onChangeListenser: (String? newValue) {
-                              controller.onChangeEmail(newValue!);
-                            },
-                            onValidateListenser: (String? value) {
-                              return ValidateField.instance
-                                  .validateField(value!);
-                            },
-                            initialValue: "",
-                          ),
-                          const SizedBox(height: 10),
-                          Container(
-                            width: double.maxFinite,
-                            padding: const EdgeInsets.all(4),
-                            alignment: Alignment.centerRight,
-                            child: InkWell(
-                              onTap: () {},
-                              child: const Text(
-                                "Forget password ?",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: appFont,
-                                  color: Colors.black54,
+                  GetX<LoginController>(
+                      init: LoginController.instance,
+                      builder: (controller) {
+                        if (controller.isLoading.value) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return Form(
+                          key: formKey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const SizedBox(height: 20),
+                              const SizedBox(height: 10),
+                              TextFormFieldSharedWidget(
+                                label: "email",
+                                hint: "email",
+                                textType: TextInputType.emailAddress,
+                                prefIcon: Icons.email,
+                                onChangeListenser: (String? newValue) {
+                                  controller.onChangeEmail(newValue!);
+                                },
+                                onValidateListenser: (String? value) {
+                                  return ValidateField.instance
+                                      .validateField(value!);
+                                },
+                                initialValue: "",
+                              ),
+                              const SizedBox(height: 10),
+                              Container(
+                                width: double.maxFinite,
+                                padding: const EdgeInsets.all(4),
+                                alignment: Alignment.centerRight,
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: const Text(
+                                    "Forget password ?",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: appFont,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              const SizedBox(height: 10),
+                              TextFormFieldSharedWidget(
+                                label: "password",
+                                hint: "password",
+                                textType: TextInputType.phone,
+                                prefIcon: Icons.lock,
+                                onChangeListenser: (String? newValue) {
+                                  controller.onChangePassword(newValue!);
+                                },
+                                onValidateListenser: (String? value) {
+                                  return ValidateField.instance
+                                      .validatePasswordF(value);
+                                },
+                                initialValue: "",
+                              ),
+                              const SizedBox(height: 25),
+                              TextIconBtnSharedWidget(
+                                btnTitle: "Login",
+                                btnHeight:
+                                    ScreenHandler.getScreenHeight(context) / 13,
+                                btnWidth:
+                                    ScreenHandler.getScreenWidth(context) / 2,
+                                btnColor: AppColor.color2,
+                                btnRaduis: 12,
+                                onClick: () {
+                                  Get.offAll(() => const MainView());
+                                },
+                                icon: Icons.navigate_next_outlined,
+                                iconColor: Colors.black,
+                              ),
+                              const SizedBox(height: 8),
+                              AuthLinksSharedWidget(
+                                onClick: () {
+                                  Get.back();
+                                },
+                                text: "Do not have an account?",
+                                textLink: "register",
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 10),
-                          TextFormFieldSharedWidget(
-                            label: "password",
-                            hint: "password",
-                            textType: TextInputType.phone,
-                            prefIcon: Icons.lock,
-                            onChangeListenser: (String? newValue) {
-                              controller.onChangePassword(newValue!);
-                            },
-                            onValidateListenser: (String? value) {
-                              return ValidateField.instance
-                                  .validatePasswordF(value);
-                            },
-                            initialValue: "",
-                          ),
-                          const SizedBox(height: 25),
-                          TextIconBtnSharedWidget(
-                            btnTitle: "Login",
-                            btnHeight:
-                                ScreenHandler.getScreenHeight(context) / 13,
-                            btnWidth: ScreenHandler.getScreenWidth(context) / 2,
-                            btnColor: AppColor.color2,
-                            btnRaduis: 12,
-                            onClick: () {},
-                            icon: Icons.navigate_next_outlined,
-                            iconColor: Colors.black,
-                          ),
-                          const SizedBox(height: 8),
-                          AuthLinksSharedWidget(
-                            onClick: () {
-                              Get.back();
-                            },
-                            text: "Do not have an account?",
-                            textLink: "register",
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
+                        );
+                      }),
                   SizedBox(height: ScreenHandler.getScreenHeight(context) / 24),
                   const Center(
                     child: Text(
@@ -180,7 +186,7 @@ class LoginView extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: Center(
                           child: AuthTextIconBtnWidget(
                             btnTitle: "Phone Number",
@@ -189,7 +195,7 @@ class LoginView extends StatelessWidget {
                             btnWidth:
                                 ScreenHandler.getScreenWidth(context) / 0.4,
                             btnColor: AppColor.color2,
-                            btnRaduis: 12,
+                            btnRaduis: 8,
                             onClick: () {},
                             image: phoneImg,
                             fontSize: 15,
@@ -198,7 +204,7 @@ class LoginView extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: Center(
                           child: AuthTextIconBtnWidget(
                             btnTitle: "Google",
