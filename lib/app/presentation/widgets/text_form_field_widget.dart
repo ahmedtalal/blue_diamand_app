@@ -40,25 +40,21 @@ class TextFormFieldSharedWidget extends StatelessWidget {
             hintText: hint,
             label: Text(
               label,
-              style: TextStyle(
-                color: Colors.grey[400],
+              style: const TextStyle(
                 fontSize: 15,
                 fontFamily: appFont,
               ),
             ),
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               fontSize: 14,
               fontFamily: appFont,
               fontWeight: FontWeight.w200,
-              color: Colors.grey[500],
             ),
             prefixIcon: Icon(
               prefIcon,
               size: 22,
-              color: Colors.grey,
             ),
-            suffixIcon: label.toLowerCase() == "password" ||
-                    label.toLowerCase() == "confirm password"
+            suffixIcon: label.toLowerCase().contains("password")
                 ? IconButton(
                     onPressed: () {
                       setState(() {
@@ -70,13 +66,11 @@ class TextFormFieldSharedWidget extends StatelessWidget {
                       passwordVisibilty!
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: Colors.grey,
                     ),
                   )
                 : null,
           ),
-          obscureText: label.toLowerCase() == "password" ||
-                  label.toLowerCase() == "confirm password "
+          obscureText: label.toLowerCase().contains("password")
               ? passwordObscure!
               : false,
           enabled: true,

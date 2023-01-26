@@ -3,6 +3,7 @@ import 'package:drinking_app/app/config/validate_field.dart';
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/presentation/controllers/register_controller.dart';
+import 'package:drinking_app/app/presentation/controllers/theme_controller.dart';
 import 'package:drinking_app/app/presentation/views/login_view.dart';
 import 'package:drinking_app/app/core/utils/widgets/auth_links_shared_widget.dart';
 import 'package:drinking_app/app/presentation/widgets/text_form_field_widget.dart';
@@ -26,12 +27,14 @@ class RegisterView extends StatelessWidget {
           margin: EdgeInsets.only(
             top: ScreenHandler.getScreenHeight(context) / 8,
           ),
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(14),
               topRight: Radius.circular(14),
             ),
-            color: Colors.white,
+            color: ThemeStorage.instance().getKey()
+                ? Colors.black54
+                : Colors.white,
           ),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -66,7 +69,6 @@ class RegisterView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: appFont,
-                      color: Colors.black45,
                     ),
                   ),
                   SizedBox(height: ScreenHandler.getScreenHeight(context) / 20),
@@ -75,7 +77,6 @@ class RegisterView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: appFont,
-                      color: Colors.black54,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -133,7 +134,6 @@ class RegisterInformationModel extends StatelessWidget {
             style: TextStyle(
               fontSize: 25,
               fontFamily: appFont,
-              color: Colors.black,
             ),
           ),
           const SizedBox(height: 20),
@@ -146,7 +146,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeFullName(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -160,7 +160,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeDate(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -174,7 +174,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.emiratesId(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -188,7 +188,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeNationality(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -202,7 +202,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeEmail(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -216,7 +216,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeCallingNumber(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -230,7 +230,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeWhatsAppNumber(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -244,7 +244,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeEmiratesCity(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -258,7 +258,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.onChangeArea(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -273,7 +273,7 @@ class RegisterInformationModel extends StatelessWidget {
               controller.choiceRegisterSection.value = 2;
             },
             icon: Icons.navigate_next_outlined,
-            iconColor: Colors.black,
+            iconColor: Colors.white,
           ),
           const SizedBox(height: 8),
           AuthLinksSharedWidget(
@@ -314,7 +314,6 @@ class RegisterResidentialAddressModel extends StatelessWidget {
             style: TextStyle(
               fontSize: 25,
               fontFamily: appFont,
-              color: Colors.black,
             ),
           ),
           const SizedBox(height: 20),
@@ -327,7 +326,7 @@ class RegisterResidentialAddressModel extends StatelessWidget {
               controller.onChangeStreet(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -341,7 +340,7 @@ class RegisterResidentialAddressModel extends StatelessWidget {
               controller.onChangeVillaName(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -355,7 +354,7 @@ class RegisterResidentialAddressModel extends StatelessWidget {
               controller.onChangeLamdMark(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -369,7 +368,7 @@ class RegisterResidentialAddressModel extends StatelessWidget {
               controller.onChangeType(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -377,13 +376,13 @@ class RegisterResidentialAddressModel extends StatelessWidget {
           TextFormFieldSharedWidget(
             label: "name of contact",
             hint: "name of contact person",
-            textType: TextInputType.phone,
             prefIcon: Icons.contact_mail_outlined,
+            textType: TextInputType.phone,
             onChangeListenser: (String? newValue) {
               controller.onChangeNameOfContact(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -397,7 +396,7 @@ class RegisterResidentialAddressModel extends StatelessWidget {
               controller.onChangeNmuberOfPerson(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -409,13 +408,13 @@ class RegisterResidentialAddressModel extends StatelessWidget {
                   btnTitle: "Back",
                   btnHeight: ScreenHandler.getScreenHeight(context) / 13,
                   btnWidth: ScreenHandler.getScreenWidth(context) / 2,
-                  btnColor: Colors.red,
+                  btnColor: AppColor.color1,
                   btnRaduis: 12,
                   onClick: () {
                     controller.choiceRegisterSection.value = 1;
                   },
-                  icon: Icons.navigate_next_outlined,
-                  iconColor: Colors.black,
+                  icon: Icons.keyboard_arrow_left_outlined,
+                  iconColor: Colors.white,
                 ),
               ),
               const SizedBox(width: 10),
@@ -430,7 +429,7 @@ class RegisterResidentialAddressModel extends StatelessWidget {
                     controller.choiceRegisterSection.value = 3;
                   },
                   icon: Icons.navigate_next_outlined,
-                  iconColor: Colors.black,
+                  iconColor: Colors.white,
                 ),
               ),
             ],
@@ -474,7 +473,6 @@ class RegisterWorkAdressModel extends StatelessWidget {
             style: TextStyle(
               fontSize: 25,
               fontFamily: appFont,
-              color: Colors.black,
             ),
           ),
           const SizedBox(height: 20),
@@ -487,7 +485,7 @@ class RegisterWorkAdressModel extends StatelessWidget {
               controller.onChangeWorkHouse(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -501,7 +499,7 @@ class RegisterWorkAdressModel extends StatelessWidget {
               controller.onChangeContactPerson(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -515,7 +513,7 @@ class RegisterWorkAdressModel extends StatelessWidget {
               controller.onChangestaff(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -529,7 +527,7 @@ class RegisterWorkAdressModel extends StatelessWidget {
               controller.onChangeUserName(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validateField(value!);
+              return ValidateField.instance().validateField(value!);
             },
             initialValue: "",
           ),
@@ -543,7 +541,7 @@ class RegisterWorkAdressModel extends StatelessWidget {
               controller.onChangePassword(newValue!);
             },
             onValidateListenser: (String? value) {
-              return ValidateField.instance.validatePasswordF(value);
+              return ValidateField.instance().validatePasswordF(value);
             },
             initialValue: "",
           ),
@@ -555,14 +553,14 @@ class RegisterWorkAdressModel extends StatelessWidget {
                   btnTitle: "Back",
                   btnHeight: ScreenHandler.getScreenHeight(context) / 13,
                   btnWidth: ScreenHandler.getScreenWidth(context) / 2,
-                  btnColor: Colors.red,
+                  btnColor: AppColor.color1,
                   btnRaduis: 12,
                   onClick: () {
                     controller.choiceRegisterSection.value = 2;
                     //Get.to(() => const RegisterView());
                   },
-                  icon: Icons.navigate_next_outlined,
-                  iconColor: Colors.black,
+                  icon: Icons.keyboard_arrow_left_outlined,
+                  iconColor: Colors.white,
                 ),
               ),
               const SizedBox(width: 10),
@@ -577,7 +575,7 @@ class RegisterWorkAdressModel extends StatelessWidget {
                     controller.onClickRegister(formKey);
                   },
                   icon: Icons.navigate_next_outlined,
-                  iconColor: Colors.black,
+                  iconColor: Colors.white,
                 ),
               ),
             ],

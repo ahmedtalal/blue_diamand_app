@@ -4,6 +4,7 @@ import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/presentation/controllers/login_controller.dart';
 import 'package:drinking_app/app/core/utils/widgets/auth_links_shared_widget.dart';
+import 'package:drinking_app/app/presentation/controllers/theme_controller.dart';
 import 'package:drinking_app/app/presentation/views/main_view.dart';
 import 'package:drinking_app/app/presentation/widgets/auth_text_icon_widget.dart';
 import 'package:drinking_app/app/presentation/widgets/text_form_field_widget.dart';
@@ -29,12 +30,14 @@ class LoginView extends StatelessWidget {
           margin: EdgeInsets.only(
             top: ScreenHandler.getScreenHeight(context) / 8,
           ),
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(14),
               topRight: Radius.circular(14),
             ),
-            color: Colors.white,
+            color: ThemeStorage.instance().getKey()
+                ? Colors.black54
+                : Colors.white,
           ),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -69,7 +72,6 @@ class LoginView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: appFont,
-                      color: Colors.black45,
                     ),
                   ),
                   SizedBox(height: ScreenHandler.getScreenHeight(context) / 20),
@@ -78,7 +80,6 @@ class LoginView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontFamily: appFont,
-                      color: Colors.black54,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -107,8 +108,23 @@ class LoginView extends StatelessWidget {
                                   controller.onChangeEmail(newValue!);
                                 },
                                 onValidateListenser: (String? value) {
-                                  return ValidateField.instance
+                                  return ValidateField.instance()
                                       .validateField(value!);
+                                },
+                                initialValue: "",
+                              ),
+                              const SizedBox(height: 10),
+                              TextFormFieldSharedWidget(
+                                label: "password",
+                                hint: "password",
+                                textType: TextInputType.phone,
+                                prefIcon: Icons.lock,
+                                onChangeListenser: (String? newValue) {
+                                  controller.onChangePassword(newValue!);
+                                },
+                                onValidateListenser: (String? value) {
+                                  return ValidateField.instance()
+                                      .validatePasswordF(value);
                                 },
                                 initialValue: "",
                               ),
@@ -124,25 +140,9 @@ class LoginView extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontFamily: appFont,
-                                      color: Colors.black54,
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 10),
-                              TextFormFieldSharedWidget(
-                                label: "password",
-                                hint: "password",
-                                textType: TextInputType.phone,
-                                prefIcon: Icons.lock,
-                                onChangeListenser: (String? newValue) {
-                                  controller.onChangePassword(newValue!);
-                                },
-                                onValidateListenser: (String? value) {
-                                  return ValidateField.instance
-                                      .validatePasswordF(value);
-                                },
-                                initialValue: "",
                               ),
                               const SizedBox(height: 25),
                               TextIconBtnSharedWidget(
@@ -157,7 +157,7 @@ class LoginView extends StatelessWidget {
                                   Get.offAll(() => const MainView());
                                 },
                                 icon: Icons.navigate_next_outlined,
-                                iconColor: Colors.black,
+                                iconColor: Colors.white,
                               ),
                               const SizedBox(height: 8),
                               AuthLinksSharedWidget(
@@ -231,4 +231,19 @@ class LoginView extends StatelessWidget {
       ),
     );
   }
+}
+
+class Student {
+  final String? name;
+  final int? age;
+  Student({this.name, this.age}); // named parameter
+  Student.st2([this.name, this.age]); //  positional parameter
+  Student.st3(this.name, [this.age = 10]); // default parameter
+
+}
+
+class X {
+  Student s = Student(name: "ahmed");
+  Student s2 = Student.st2("ali");
+  Student s3 = Student.st3("ali");
 }

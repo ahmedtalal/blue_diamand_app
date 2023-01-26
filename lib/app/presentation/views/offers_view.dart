@@ -18,7 +18,7 @@ class OffersView extends StatelessWidget {
         height: ScreenHandler.getScreenHeight(context),
         width: ScreenHandler.getScreenWidth(context),
         margin: EdgeInsets.only(
-          top: ScreenHandler.getScreenHeight(context) / 12,
+          top: ScreenHandler.getScreenHeight(context) / 20,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 10,

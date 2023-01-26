@@ -33,24 +33,43 @@ class TextIconBtnSharedWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(btnRaduis),
           color: btnColor,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              btnTitle,
-              style: const TextStyle(
-                fontSize: 18,
-                fontFamily: appFont,
-                color: Colors.white,
+        child: btnTitle.toLowerCase() == "back"
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    icon,
+                    size: 20,
+                    color: iconColor,
+                  ),
+                  Text(
+                    btnTitle,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: appFont,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    btnTitle,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: appFont,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Icon(
+                    icon,
+                    size: 25,
+                    color: iconColor,
+                  ),
+                ],
               ),
-            ),
-            Icon(
-              icon,
-              size: 25,
-              color: iconColor,
-            ),
-          ],
-        ),
       ),
     );
   }

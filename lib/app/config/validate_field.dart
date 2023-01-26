@@ -1,7 +1,12 @@
 class ValidateField {
-  static final ValidateField _validateField = ValidateField._internal();
+  static ValidateField? _validateField;
   ValidateField._internal();
-  static ValidateField get instance => _validateField;
+  static ValidateField instance() {
+    if (_validateField == null) {
+      return _validateField = ValidateField._internal();
+    }
+    return _validateField!;
+  }
 
   String? validateField(String value) {
     if (value.isEmpty) {

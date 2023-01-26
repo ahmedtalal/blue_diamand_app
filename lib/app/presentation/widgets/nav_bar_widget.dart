@@ -1,5 +1,6 @@
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
+import 'package:drinking_app/app/presentation/views/setting_view.dart';
 import 'package:drinking_app/app/presentation/views/user_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
@@ -63,12 +64,10 @@ class NavBarWidget extends StatelessWidget {
             leading: const Icon(
               Icons.list_alt,
               size: 19,
-              color: Colors.black54,
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 19,
-              color: Colors.black54,
             ),
             onTap: () {},
           ),
@@ -84,12 +83,10 @@ class NavBarWidget extends StatelessWidget {
             leading: const Icon(
               Icons.fact_check,
               size: 19,
-              color: Colors.black54,
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 19,
-              color: Colors.black54,
             ),
             onTap: () {},
           ),
@@ -105,12 +102,10 @@ class NavBarWidget extends StatelessWidget {
             leading: const Icon(
               Icons.dvr,
               size: 19,
-              color: Colors.black54,
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 19,
-              color: Colors.black54,
             ),
             onTap: () {},
           ),
@@ -126,12 +121,10 @@ class NavBarWidget extends StatelessWidget {
             leading: const Icon(
               Icons.format_list_bulleted_outlined,
               size: 19,
-              color: Colors.black54,
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 19,
-              color: Colors.black54,
             ),
             onTap: () {},
           ),
@@ -147,12 +140,10 @@ class NavBarWidget extends StatelessWidget {
             leading: const Icon(
               Icons.assignment_ind,
               size: 19,
-              color: Colors.black54,
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 19,
-              color: Colors.black54,
             ),
             onTap: () {
               Get.to(() => const UserProfileView());
@@ -170,12 +161,10 @@ class NavBarWidget extends StatelessWidget {
             leading: const Icon(
               Icons.favorite_border,
               size: 19,
-              color: Colors.black54,
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 19,
-              color: Colors.black54,
             ),
             onTap: () {},
           ),
@@ -191,14 +180,14 @@ class NavBarWidget extends StatelessWidget {
             leading: const Icon(
               Icons.settings,
               size: 19,
-              color: Colors.black54,
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 19,
-              color: Colors.black54,
             ),
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const SettingsView());
+            },
           ),
           ListTile(
             horizontalTitleGap: -10,
@@ -212,12 +201,10 @@ class NavBarWidget extends StatelessWidget {
             leading: const Icon(
               Icons.share_outlined,
               size: 19,
-              color: Colors.black54,
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 19,
-              color: Colors.black54,
             ),
             onTap: () {},
           ),
@@ -233,33 +220,10 @@ class NavBarWidget extends StatelessWidget {
             leading: const Icon(
               Icons.rate_review,
               size: 19,
-              color: Colors.black54,
             ),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 19,
-              color: Colors.black54,
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            horizontalTitleGap: -10,
-            title: const Text(
-              "Change Password",
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: appFont,
-              ),
-            ),
-            leading: const Icon(
-              Icons.lock_reset,
-              size: 19,
-              color: Colors.black54,
-            ),
-            trailing: const Icon(
-              Icons.arrow_forward_ios,
-              size: 19,
-              color: Colors.black54,
             ),
             onTap: () {},
           ),

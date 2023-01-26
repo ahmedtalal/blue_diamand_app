@@ -62,7 +62,6 @@ class SplashScreenview extends StatelessWidget {
                           fontSize: 18,
                           fontFamily: appFont,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black38,
                         ),
                       ),
                     ),

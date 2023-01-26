@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:drinking_app/app/config/screen_handler.dart';
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/presentation/controllers/main_view_controller.dart';
+import 'package:drinking_app/app/presentation/controllers/theme_controller.dart';
 import 'package:drinking_app/app/presentation/widgets/curved_items.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,12 @@ class MainView extends StatelessWidget {
           return Scaffold(
             bottomNavigationBar: CurvedNavigationBar(
               backgroundColor: AppColor.color2,
-              buttonBackgroundColor: Colors.white,
+              color: ThemeStorage.instance().getKey()
+                  ? AppColor.greyColor
+                  : Colors.white,
+              buttonBackgroundColor: ThemeStorage.instance().getKey()
+                  ? AppColor.greyColor
+                  : Colors.white,
               onTap: controller.checkCurrentIndex,
               items: [
                 curvedItems(image: homeImg),

@@ -31,7 +31,7 @@ class LoginController extends GetxController {
         password: password.value,
       );
       isLoading.value = true;
-      final result = await LoginUseCase.instance
+      final result = await LoginUseCase.instance()
           .loginCall(authEntity, AuthRepositoryImp.instance);
       if (result[mapKey].toString() == successMapkey) {
         Get.offAll(
@@ -46,5 +46,25 @@ class LoginController extends GetxController {
         );
       }
     }
+  }
+}
+
+class Animal {
+  displayAnimal() {
+    print("this is animal");
+  }
+}
+
+class Voice {
+  talk() {
+    print("this is talk");
+  }
+}
+
+class Cat extends Animal with Voice {
+  @override
+  talk() {
+    print("this is cat talk");
+    return super.talk();
   }
 }

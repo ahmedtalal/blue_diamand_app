@@ -20,7 +20,7 @@ class CartView extends StatelessWidget {
         height: ScreenHandler.getScreenHeight(context),
         width: ScreenHandler.getScreenWidth(context),
         margin: EdgeInsets.only(
-          top: ScreenHandler.getScreenHeight(context) / 12,
+          top: ScreenHandler.getScreenHeight(context) / 20,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 10,
@@ -78,10 +78,10 @@ class CartView extends StatelessWidget {
                   ),
                   TextBtnSharedWidget(
                     btnTitle: "Check out",
-                    btnHeight: 48,
-                    btnWidth: ScreenHandler.getScreenWidth(context) / 2.9,
+                    btnHeight: 44,
+                    btnWidth: ScreenHandler.getScreenWidth(context) / 3.4,
                     btnColor: AppColor.color5,
-                    btnRaduis: 17,
+                    btnRaduis: 15,
                     onClick: () {},
                   ),
                 ],
