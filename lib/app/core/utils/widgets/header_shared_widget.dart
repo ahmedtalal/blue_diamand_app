@@ -20,7 +20,6 @@ class HeaderSharedWidget extends StatelessWidget {
               onTap: onClick,
               child: const Icon(
                 Icons.sort,
-                color: Colors.black,
                 size: 20,
               ),
             ),

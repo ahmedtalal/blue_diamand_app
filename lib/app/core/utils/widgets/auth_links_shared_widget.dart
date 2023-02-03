@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:flutter/material.dart';

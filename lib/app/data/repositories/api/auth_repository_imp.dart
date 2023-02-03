@@ -9,9 +9,8 @@ class AuthRepositoryImp implements IAuthRepository {
   static AuthRepositoryImp get instance => _authRepositoryImp;
 
   @override
-  Future<Map<String, dynamic>> checkIsLogin() {
-    // TODO: implement checkIsLogin
-    throw UnimplementedError();
+  bool checkIsLogin() {
+    return AuthApiService.instance.checkIsUserLoginedService();
   }
 
   @override

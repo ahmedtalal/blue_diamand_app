@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
         height: ScreenHandler.getScreenHeight(context),
         width: ScreenHandler.getScreenWidth(context),
         margin: EdgeInsets.only(
-          top: ScreenHandler.getScreenHeight(context) / 12,
+          top: ScreenHandler.getScreenHeight(context) /20,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 10,
@@ -39,14 +39,14 @@ class HomeView extends StatelessWidget {
                 },
               ),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               TextFormFieldSharedWidget(
                 label: "search here",
                 hint: "search here",
                 textType: TextInputType.text,
                 prefIcon: Icons.search,
-                onChangeListenser: (String? newvalue) {},
+                onChangeListenser: (String? newValue) {},
                 onValidateListenser: (String? value) {},
                 initialValue: "",
               ),

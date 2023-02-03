@@ -8,5 +8,5 @@ abstract class IAuthRepository {
   Future<Map<String, dynamic>> googleLogin();
   Future<Map<String, dynamic>> phoneNumberLogin();
   Future<Map<String, dynamic>> logOut();
-  Future<Map<String, dynamic>> checkIsLogin();
+  bool checkIsLogin();
 }

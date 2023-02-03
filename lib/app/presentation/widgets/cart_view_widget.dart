@@ -46,14 +46,13 @@ class CartViewWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: appFont,
-                        color: Colors.black54,
                       ),
                     ),
                     InkWell(
                       onTap: () {},
                       child: const Icon(
                         Icons.delete,
-                        color: AppColor.color5,
+                        color: Colors.red,
                         size: 20,
                       ),
                     ),
@@ -82,12 +81,12 @@ class CartViewWidget extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(5),
                           color: AppColor.color2,
                         ),
                         child: const Icon(
                           Icons.remove,
-                          size: 22,
+                          size: 20,
                           color: Colors.white,
                         ),
                       ),
@@ -100,7 +99,7 @@ class CartViewWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: appFont,
-                        color: Colors.grey[700],
+                        color: Colors.grey[600],
                       ),
                     ),
                     const SizedBox(
@@ -111,12 +110,12 @@ class CartViewWidget extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(5),
                           color: AppColor.color5,
                         ),
                         child: const Icon(
                           Icons.add,
-                          size: 22,
+                          size: 20,
                           color: Colors.white,
                         ),
                       ),
