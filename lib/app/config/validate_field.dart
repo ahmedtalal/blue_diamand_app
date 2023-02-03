@@ -15,26 +15,43 @@ class ValidateField {
     return null;
   }
 
-  String? validatePhoneNumber(String? newValue) {
-    if (newValue!.isEmpty) {
+  String? validateEmail(String? value) {
+    if (value!.isEmpty) {
       return "this field is required";
-    } else if (newValue.length != 11 || newValue.contains(RegExp(r'[A-Z]'))) {
-      return "your phone is not validate and may be wrong ";
-    } else if (newValue.substring(0, 3) == "011" ||
-        newValue.substring(0, 3) == "012" ||
-        newValue.substring(0, 3) == "015" ||
-        newValue.substring(0, 3) == "010") {
-      return null;
+    } else if (!value.contains("@") || !value.contains("com")) {
+      return "the formate is wrong";
     }
     return null;
   }
 
-  String? validatePasswordF(String? newValue) {
+  // this code to validate any phone number
+  String? validatePhoneNumber(String? newValue) {
+    String phoneNumberPattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp phoneRegExp = RegExp(phoneNumberPattern);
     if (newValue!.isEmpty) {
       return "this field is required";
-    } else if (newValue.length != 5 && !newValue.contains(RegExp(r'[A-Z]'))) {
+    } else if (!phoneRegExp.hasMatch(newValue)) {
+      return "Please enter valid phone number";
+    }
+    return null;
+  }
+
+  String? validatePassword(String? newValue) {
+    if (newValue!.isEmpty) {
+      return "this field is required";
+    } else if (newValue.length < 5 && !newValue.contains(RegExp(r'[A-Z]'))) {
       return "weak password or must contain numbers and letters and @,#";
     }
     return null;
+  }
+
+  String? validateEmirateId(String? newValue) {
+    if (newValue!.isEmpty) {
+      return "this field is required";
+    } else if (newValue.length != 15) {
+      return "the length of id must be equal 15 numbers";
+    } else {
+      return null;
+    }
   }
 }

@@ -21,10 +21,10 @@ class DioExceptions implements Exception {
     }
   }
 
-  static String _handleErrorMessage(int? statuscode, dynamic error) {
-    switch (statuscode) {
+  static String _handleErrorMessage(int? statusCode, dynamic error) {
+    switch (statusCode) {
       case 400:
-        return "Bad request";
+        return "Bad request and the error is ${error["error"]}";
       case 409:
         return error["error"];
       case 500:

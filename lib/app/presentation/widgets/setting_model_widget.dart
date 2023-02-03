@@ -3,6 +3,8 @@ import 'package:drinking_app/app/presentation/controllers/theme_controller.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
+import '../../data/services/local/theme_local_Storage.dart';
+
 class SettingModelWidget extends StatelessWidget {
   const SettingModelWidget({
     required this.title,

@@ -2,15 +2,16 @@ import 'package:drinking_app/app/config/screen_handler.dart';
 import 'package:drinking_app/app/config/validate_field.dart';
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
-import 'package:drinking_app/app/presentation/controllers/login_controller.dart';
+import 'package:drinking_app/app/presentation/controllers/auth_controller.dart';
 import 'package:drinking_app/app/core/utils/widgets/auth_links_shared_widget.dart';
-import 'package:drinking_app/app/presentation/controllers/theme_controller.dart';
 import 'package:drinking_app/app/presentation/views/main_view.dart';
 import 'package:drinking_app/app/presentation/widgets/auth_text_icon_widget.dart';
 import 'package:drinking_app/app/presentation/widgets/text_form_field_widget.dart';
 import 'package:drinking_app/app/core/utils/widgets/text_icon_btn_shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../data/services/local/theme_local_Storage.dart';
 
 class LoginView extends StatelessWidget {
   static GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -83,8 +84,8 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  GetX<LoginController>(
-                      init: LoginController.instance,
+                  GetX<AuthController>(
+                      init: AuthController.instance,
                       builder: (controller) {
                         if (controller.isLoading.value) {
                           return const Center(
@@ -104,9 +105,7 @@ class LoginView extends StatelessWidget {
                                 hint: "email",
                                 textType: TextInputType.emailAddress,
                                 prefIcon: Icons.email,
-                                onChangeListenser: (String? newValue) {
-                                  controller.onChangeEmail(newValue!);
-                                },
+                                onChangeListenser: controller.onChangeEmail,
                                 onValidateListenser: (String? value) {
                                   return ValidateField.instance()
                                       .validateField(value!);
@@ -124,7 +123,7 @@ class LoginView extends StatelessWidget {
                                 },
                                 onValidateListenser: (String? value) {
                                   return ValidateField.instance()
-                                      .validatePasswordF(value);
+                                      .validatePassword(value);
                                 },
                                 initialValue: "",
                               ),
@@ -231,19 +230,4 @@ class LoginView extends StatelessWidget {
       ),
     );
   }
-}
-
-class Student {
-  final String? name;
-  final int? age;
-  Student({this.name, this.age}); // named parameter
-  Student.st2([this.name, this.age]); //  positional parameter
-  Student.st3(this.name, [this.age = 10]); // default parameter
-
-}
-
-class X {
-  Student s = Student(name: "ahmed");
-  Student s2 = Student.st2("ali");
-  Student s3 = Student.st3("ali");
 }

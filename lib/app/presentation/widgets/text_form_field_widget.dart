@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class TextFormFieldSharedWidget extends StatelessWidget {
   final String label, hint, initialValue;
-  final Function(String?) onChangeListenser;
+  final dynamic Function(String?) onChangeListenser;
   final String? Function(String?) onValidateListenser;
   final IconData prefIcon;
   final TextInputType textType;

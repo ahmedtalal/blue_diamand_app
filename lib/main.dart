@@ -1,3 +1,4 @@
+import 'package:drinking_app/app/presentation/controllers/auth_controller.dart';
 import 'package:drinking_app/app/presentation/controllers/theme_controller.dart';
 import 'package:drinking_app/app/presentation/routes/app_pages.dart';
 import 'package:drinking_app/app/presentation/routes/app_routes.dart';
@@ -17,12 +18,16 @@ class DrinkApp extends StatelessWidget {
     return GetBuilder<ThemeController>(
       init: ThemeController.instance(),
       builder: (controller) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.splashScreenViewRout,
-          getPages: AppPages.pages,
-          theme: controller.getTheme(),
-        );
+        return GetBuilder<AuthController>(
+            init: AuthController.instance,
+            builder: (authController) {
+              return GetMaterialApp(
+                debugShowCheckedModeBanner: false,
+                initialRoute: authController.checkUserIsLoginController(),
+                getPages: AppPages.pages,
+                theme: controller.getTheme(),
+              );
+            });
       },
     );
   }

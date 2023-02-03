@@ -6,12 +6,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class CurdApiHelper {
-  // here using singletone pattern
+  // here using singleton pattern
   static final CurdApiHelper _curdApiHelper = CurdApiHelper._internal();
   CurdApiHelper._internal();
   static CurdApiHelper get instance => _curdApiHelper;
 
-  static const apiBaseUrl = "http://127.0.0.1:3000/api/";
+  static const apiBaseUrl = "https://e-commerce-node-api-d7f3.onrender.com/api/";
   Dio _initDio() {
     Dio dio = Dio(
       BaseOptions(

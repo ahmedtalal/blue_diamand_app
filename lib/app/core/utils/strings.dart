@@ -9,6 +9,8 @@ const String mapKey = "key";
 const String mapvalue = "value";
 const String successMapkey = "success";
 const String failedMapKey = "failed";
+const String userNotFound = "user not found in local storage";
+
 Map<String, dynamic> successRequest({required var responseBody}) {
   return {
     mapKey: successMapkey,
