@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:drinking_app/app/config/dio_exceptions.dart';
+import 'package:drinking_app/app/core/utils/api_paths.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/data/models/auth_model.dart';
 import 'package:drinking_app/app/data/services/apis/curd_api_helper.dart';
@@ -18,8 +21,8 @@ class AuthApiService {
   Future<Map<String, dynamic>> registerApiService(AuthEntity authEntity) async {
     try {
       Map<String, dynamic> data = AuthModel.toJson(authEntity);
-      Response response =
-          await _curdApiHelper.postRequest(path: "user/create/", data: data);
+      Response response = await _curdApiHelper.postRequest(
+          path: REGISTER_REQUEST_API_PATH, data: data);
       return successRequest(responseBody: response.data);
     } on DioError catch (e) {
       String error = DioExceptions.dioErrorHandling(e);
@@ -33,8 +36,8 @@ class AuthApiService {
   Future<Map<String, dynamic>> loginApiService(AuthEntity authEntity) async {
     try {
       Map<String, dynamic> data = AuthModel.toJson(authEntity);
-      Response response =
-          await _curdApiHelper.postRequest(path: "user/login/", data: data);
+      Response response = await _curdApiHelper.postRequest(
+          path: LOGIN_REQUEST_API_PATH, data: data);
       return successRequest(responseBody: response.data);
     } on DioError catch (e) {
       String message = DioExceptions.dioErrorHandling(e);
@@ -48,5 +51,39 @@ class AuthApiService {
     return UserInfoLocalService.instance().getUserInfo() != userNotFound
         ? true
         : false;
+  }
+
+  Future<bool> logoutApiService() async {
+    try {
+      await UserInfoLocalService.instance().deleteUserInfo();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<Map<String, dynamic>> changePaswordApiService({
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      String userInfo = UserInfoLocalService.instance().getUserInfo();
+      Map userData =
+          UserInfoLocalService.instance().convertStringToJson(userInfo);
+      String userToken = userData["token"];
+      Options options =
+          Options(headers: {"authorization": "Bearer $userToken"});
+      Response response = await CurdApiHelper.instance.putRequest(
+        path: CHANGE_PASSWORD_REQUEST_API_PATH,
+        options: options,
+        data: data,
+      );
+      return successRequest(responseBody: response.data);
+    } on DioError catch (e) {
+      String error = DioExceptions.dioErrorHandling(e);
+      return failedRequest(responseBody: error);
+    } catch (e) {
+      print("error from catch ");
+      return failedRequest(responseBody: e.toString());
+    }
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -25,5 +27,13 @@ class UserInfoLocalService {
 
   String getUserInfo() {
     return _getStorage.read(_userKey) ?? userNotFound;
+  }
+
+  Future<void> deleteUserInfo() async {
+    await _getStorage.remove(_userKey);
+  }
+
+  Map convertStringToJson(String data) {
+    return json.decode(data);
   }
 }

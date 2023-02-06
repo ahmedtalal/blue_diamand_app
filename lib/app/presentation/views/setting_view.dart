@@ -2,10 +2,12 @@ import 'package:drinking_app/app/config/screen_handler.dart';
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/core/utils/widgets/back_shared_widget.dart';
+import 'package:drinking_app/app/presentation/controllers/auth_controller.dart';
 import 'package:drinking_app/app/presentation/views/change_password_view.dart';
 import 'package:drinking_app/app/presentation/widgets/setting_model_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:get/state_manager.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -129,12 +131,18 @@ class SettingsView extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  SettingModelWidget(
-                    title: "LogOut",
-                    icon: Icons.logout,
-                    color: AppColor.color5,
-                    onClick: () {},
-                  ),
+                  GetBuilder<AuthController>(
+                      init: AuthController.instance,
+                      builder: (controller) {
+                        return SettingModelWidget(
+                          title: "LogOut",
+                          icon: Icons.logout,
+                          color: AppColor.color5,
+                          onClick: () {
+                            controller.logOutCon();
+                          },
+                        );
+                      }),
                 ],
               ),
             ),

@@ -8,16 +8,12 @@ import 'package:drinking_app/app/data/services/local/user_info_local_Service.dar
 import 'package:drinking_app/app/domain/entities/auth_entity.dart';
 import 'package:drinking_app/app/domain/entities/residential_address.dart';
 import 'package:drinking_app/app/domain/entities/work_address.dart';
-import 'package:drinking_app/app/domain/usecases/auth/check_user_login_usecase.dart';
-import 'package:drinking_app/app/domain/usecases/auth/register_usecase.dart';
-import 'package:drinking_app/app/domain/usecases/user_local_storage/save_user_info_in_local_storage.dart';
+import 'package:drinking_app/app/domain/usecases/usecase_provider.dart';
 import 'package:drinking_app/app/presentation/routes/app_routes.dart';
 import 'package:drinking_app/app/presentation/views/main_view.dart';
+import 'package:drinking_app/app/presentation/views/splash_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../domain/usecases/auth/login_usecase.dart';
-import '../views/home_view.dart';
 
 class AuthController extends GetxController {
   static final AuthController _authController = AuthController._internal();
@@ -54,7 +50,8 @@ class AuthController extends GetxController {
   var contactPerson = ''.obs;
   var staff = ''.obs;
   var landMark = ''.obs;
-
+  var newPassword = ''.obs;
+  var confirmPassword = ''.obs;
   var isLoading = false.obs;
 
   onChangeUserName(String? newValue) {
@@ -145,15 +142,37 @@ class AuthController extends GetxController {
     workPlaceNumber.value = newValue!;
   }
 
+  onChangeNewPassword(String? newValue) {
+    newPassword.value = newValue!;
+  }
+
+  onChangeConfirmPassword(String? newValue) {
+    confirmPassword.value = newValue!;
+  }
+
   onClickRegister(GlobalKey<FormState> key) async {
     if (key.currentState!.validate()) {
       isLoading.value = true;
-      final result = await RegisterUseCase.instance
-          .registerCall(prepareModel(), AuthRepositoryImp.instance);
+      final result = await UseCaseProvider.instance()
+          .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
+          .register(prepareModel());
       if (result[mapKey].toString() == successMapkey) {
         print("the response body is ${result[mapvalue].toString()}");
         // this line to save user info in local storage
-        await SaveUserInfoLocalStorage.instance().call(result);
+        final userInfo = await UseCaseProvider.instance()
+            .creator<UserInfoLocalService>(UserInfoLocalService.instance())
+            .saveUserInfo(result[mapvalue].toString());
+        if (userInfo[mapKey].toString() == successMapkey) {
+          Get.to(
+            () => const MainView(),
+          );
+        } else {
+          print("the error is ${result[mapvalue].toString()}");
+          showErrorDialog(
+            result[mapvalue],
+            "user info exception",
+          );
+        }
         isLoading.value = false;
       } else {
         isLoading.value = false;
@@ -173,12 +192,25 @@ class AuthController extends GetxController {
         password: password.value,
       );
       isLoading.value = true;
-      final result = await LoginUseCase.instance()
-          .loginCall(authEntity, AuthRepositoryImp.instance);
+      final result = await UseCaseProvider.instance()
+          .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
+          .login(authEntity);
       if (result[mapKey].toString() == successMapkey) {
-        Get.offAll(
-          () => const HomeView(),
-        );
+        // this line to save user info in local storage
+        final userInfo = await UseCaseProvider.instance()
+            .creator<UserInfoLocalService>(UserInfoLocalService.instance())
+            .saveUserInfo(result[mapvalue].toString());
+        if (userInfo[mapKey].toString() == successMapkey) {
+          Get.to(
+            () => const MainView(),
+          );
+        } else {
+          print("the error is ${result[mapvalue].toString()}");
+          showErrorDialog(
+            result[mapvalue],
+            "user info exception",
+          );
+        }
         isLoading.value = false;
       } else {
         isLoading.value = false;
@@ -191,9 +223,34 @@ class AuthController extends GetxController {
   }
 
   String checkUserIsLoginController() {
-    return CheckUserLoginUserCase.instance().call()
+    return UseCaseProvider.instance()
+            .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
+            .checkIsLogin()
         ? AppRoutes.mainViewRoute
         : AppRoutes.splashScreenViewRout;
+  }
+
+  logOutCon() async {
+    bool result = await UseCaseProvider.instance()
+        .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
+        .logOut();
+    if (result) {
+      Get.offAll(() => const SplashScreenview());
+    }
+  }
+
+  changePasswordCon(GlobalKey<FormState> formKey) async {
+    if (formKey.currentState!.validate()) {
+      Map data = {
+        "currentPassword": password.value,
+        "newPassword1": newPassword.value,
+        "newPassword2": confirmPassword.value,
+      };
+      final result = await UseCaseProvider.instance()
+          .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
+          .updatePassword(data);
+          
+    }
   }
 
   AuthEntity prepareModel() {
