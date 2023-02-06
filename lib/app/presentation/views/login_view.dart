@@ -153,7 +153,7 @@ class LoginView extends StatelessWidget {
                                 btnColor: AppColor.color2,
                                 btnRaduis: 12,
                                 onClick: () {
-                                  Get.offAll(() => const MainView());
+                                  controller.onClickLogin(formKey);
                                 },
                                 icon: Icons.navigate_next_outlined,
                                 iconColor: Colors.white,

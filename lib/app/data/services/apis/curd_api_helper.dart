@@ -11,15 +11,16 @@ class CurdApiHelper {
   CurdApiHelper._internal();
   static CurdApiHelper get instance => _curdApiHelper;
 
-  static const apiBaseUrl = "https://e-commerce-node-api-d7f3.onrender.com/api/";
+  static const apiBaseUrl =
+      "https://e-commerce-node-api-d7f3.onrender.com/api/";
   Dio _initDio() {
     Dio dio = Dio(
       BaseOptions(
         baseUrl: apiBaseUrl,
         contentType: "application/json",
-        // headers: {
-        //   "XApiKey": "HERE > XAPIKEY",
-        // },
+        headers: {
+          "XApiKey": "HERE > XAPIKEY",
+        },
       ),
     );
     if (apiBaseUrl.toLowerCase().startsWith('https') && !kIsWeb) {
@@ -38,9 +39,14 @@ class CurdApiHelper {
     Map<String, dynamic>? data,
     required String path,
     Map<String, dynamic>? parameters,
+    Options? options,
   }) async {
-    Response response =
-        await _initDio().post(path, data: data, queryParameters: parameters);
+    Response response = await _initDio().post(
+      path,
+      data: data,
+      queryParameters: parameters,
+      options: options,
+    );
     print(response);
     return response;
   }
@@ -48,27 +54,40 @@ class CurdApiHelper {
   Future<Response> getRequest({
     required String path,
     Map<String, dynamic>? parameters,
+    Options? options,
   }) async {
-    return await _initDio().get(path, queryParameters: parameters);
+    return await _initDio().get(
+      path,
+      queryParameters: parameters,
+      options: options,
+    );
   }
 
   Future<Response> putRequest({
     required String path,
     Map<String, dynamic>? data,
     Map<String, dynamic>? queryParameter,
+    Options? options,
   }) async {
-    return await _initDio()
-        .put(path, data: data, queryParameters: queryParameter);
+    return await _initDio().put(
+      path,
+      data: data,
+      queryParameters: queryParameter,
+      options: options,
+    );
   }
 
-  Future<Response> deleteRequest(
-      {required String path,
-      Map<String, dynamic>? parameters,
-      Map<String, dynamic>? data}) async {
+  Future<Response> deleteRequest({
+    required String path,
+    Map<String, dynamic>? parameters,
+    Map<String, dynamic>? data,
+    Options? options,
+  }) async {
     return await _initDio().delete(
       path,
       data: data,
       queryParameters: parameters,
+      options: options,
     );
   }
 }

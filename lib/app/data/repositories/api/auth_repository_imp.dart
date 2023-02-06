@@ -14,7 +14,7 @@ class AuthRepositoryImp implements IAuthRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> forgetPassword() {
+  Future<Map<String, dynamic>> forgetPassword(var data) {
     // TODO: implement forgetPassword
     throw UnimplementedError();
   }
@@ -26,9 +26,8 @@ class AuthRepositoryImp implements IAuthRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> logOut() {
-    // TODO: implement logOut
-    throw UnimplementedError();
+  Future<bool> logOut() async {
+    return await AuthApiService.instance.logoutApiService();
   }
 
   @override
@@ -43,13 +42,12 @@ class AuthRepositoryImp implements IAuthRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> register(AuthEntity authEntity) async {
+  Future<Map> register(AuthEntity authEntity) async {
     return await AuthApiService.instance.registerApiService(authEntity);
   }
 
   @override
-  Future<Map<String, dynamic>> updatePassword() {
-    // TODO: implement updatePassword
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> updatePassword(var data) async {
+    return await AuthApiService.instance.changePaswordApiService(data: data);
   }
 }
