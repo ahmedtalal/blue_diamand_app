@@ -5,11 +5,14 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:drinking_app/app/config/dio_exceptions.dart';
 import 'package:drinking_app/app/core/utils/api_paths.dart';
+import 'package:drinking_app/app/core/utils/debug_prints.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/data/models/auth_model.dart';
+import 'package:drinking_app/app/data/models/user_local_model.dart';
 import 'package:drinking_app/app/data/services/apis/curd_api_helper.dart';
 import 'package:drinking_app/app/data/services/local/user_info_local_Service.dart';
 import 'package:drinking_app/app/domain/entities/auth_entity.dart';
+import 'package:drinking_app/app/domain/entities/user_local_entity.dart';
 
 class AuthApiService {
   static final AuthApiService _authApiService = AuthApiService._internal();
@@ -35,22 +38,27 @@ class AuthApiService {
 
   Future<Map<String, dynamic>> loginApiService(AuthEntity authEntity) async {
     try {
-      Map<String, dynamic> data = AuthModel.toJson(authEntity);
+      Map<String, dynamic> data = AuthModel.loginToJson(authEntity);
+      printInfo("the login json is $data");
       Response response = await _curdApiHelper.postRequest(
           path: LOGIN_REQUEST_API_PATH, data: data);
       return successRequest(responseBody: response.data);
     } on DioError catch (e) {
       String message = DioExceptions.dioErrorHandling(e);
+      printError("the login dio error is $message");
       return failedRequest(responseBody: message);
     } catch (e) {
+      printError("the login catch error is $e");
       return failedRequest(responseBody: e.toString());
     }
   }
 
   bool checkIsUserLoginedService() {
-    return UserInfoLocalService.instance().getUserInfo() != userNotFound
-        ? true
-        : false;
+    final result = UserInfoLocalService.instance().getUserInfo();
+    if (result[mapvalue] != "user not found") {
+      return true;
+    }
+    return false;
   }
 
   Future<bool> logoutApiService() async {
@@ -66,10 +74,13 @@ class AuthApiService {
     required Map<String, dynamic> data,
   }) async {
     try {
-      String userInfo = UserInfoLocalService.instance().getUserInfo();
-      Map userData =
-          UserInfoLocalService.instance().convertStringToJson(userInfo);
-      String userToken = userData["token"];
+      Map<String, dynamic> userInfo =
+          UserInfoLocalService.instance().getUserInfo();
+      printWarning("the user info is $userInfo");
+      UserLocalEntity userData = UserLocalModel.fromJson(userInfo);
+      //UserInfoLocalService.instance().convertStringToJson(userInfo);
+      print("the user json is $userData");
+      String userToken = userData.userToken!;
       Options options =
           Options(headers: {"authorization": "Bearer $userToken"});
       Response response = await CurdApiHelper.instance.putRequest(
@@ -81,9 +92,9 @@ class AuthApiService {
     } on DioError catch (e) {
       String error = DioExceptions.dioErrorHandling(e);
       return failedRequest(responseBody: error);
-    } catch (e) {
-      print("error from catch ");
-      return failedRequest(responseBody: e.toString());
-    }
+    } // catch (e) {
+    //   print("error from catch ");
+    //   return failedRequest(responseBody: e.to);
+    // }
   }
 }

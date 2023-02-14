@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:drinking_app/app/core/utils/api_paths.dart';
 import 'package:flutter/foundation.dart';
 
 class CurdApiHelper {
@@ -11,19 +12,17 @@ class CurdApiHelper {
   CurdApiHelper._internal();
   static CurdApiHelper get instance => _curdApiHelper;
 
-  static const apiBaseUrl =
-      "https://e-commerce-node-api-d7f3.onrender.com/api/";
   Dio _initDio() {
     Dio dio = Dio(
       BaseOptions(
-        baseUrl: apiBaseUrl,
+        baseUrl: API_BASE_URL,
         contentType: "application/json",
         headers: {
           "XApiKey": "HERE > XAPIKEY",
         },
       ),
     );
-    if (apiBaseUrl.toLowerCase().startsWith('https') && !kIsWeb) {
+    if (API_BASE_URL.toLowerCase().startsWith('https') && !kIsWeb) {
       (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
           (HttpClient dioClient) {
         dioClient.badCertificateCallback =

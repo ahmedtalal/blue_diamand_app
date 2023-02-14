@@ -1,7 +1,6 @@
 import 'package:drinking_app/app/presentation/controllers/auth_controller.dart';
 import 'package:drinking_app/app/presentation/controllers/theme_controller.dart';
 import 'package:drinking_app/app/presentation/routes/app_pages.dart';
-import 'package:drinking_app/app/presentation/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
