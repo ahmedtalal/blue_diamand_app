@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:drinking_app/app/core/utils/debug_prints.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/core/utils/widgets/error__shared_widget.dart';
 import 'package:drinking_app/app/data/models/auth_model.dart';
@@ -157,17 +158,17 @@ class AuthController extends GetxController {
           .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
           .register(prepareModel());
       if (result[mapKey].toString() == successMapkey) {
-        print("the response body is ${result[mapvalue].toString()}");
+        printDone("the response body is ${result[mapvalue].toString()}");
         // this line to save user info in local storage
         final userInfo = await UseCaseProvider.instance()
             .creator<UserInfoLocalService>(UserInfoLocalService.instance())
-            .saveUserInfo(result[mapvalue].toString());
+            .saveUserInfo(result[mapvalue]);
         if (userInfo[mapKey].toString() == successMapkey) {
           Get.to(
             () => const MainView(),
           );
         } else {
-          print("the error is ${result[mapvalue].toString()}");
+          printError("the error is ${result[mapvalue].toString()}");
           showErrorDialog(
             result[mapvalue],
             "user info exception",
@@ -176,7 +177,7 @@ class AuthController extends GetxController {
         isLoading.value = false;
       } else {
         isLoading.value = false;
-        print("the error is ${result[mapvalue].toString()}");
+        printError("the error is ${result[mapvalue].toString()}");
         showErrorDialog(
           result[mapvalue],
           "auth exception",
@@ -199,13 +200,13 @@ class AuthController extends GetxController {
         // this line to save user info in local storage
         final userInfo = await UseCaseProvider.instance()
             .creator<UserInfoLocalService>(UserInfoLocalService.instance())
-            .saveUserInfo(result[mapvalue].toString());
+            .saveUserInfo(result[mapvalue]);
         if (userInfo[mapKey].toString() == successMapkey) {
           Get.to(
             () => const MainView(),
           );
         } else {
-          print("the error is ${result[mapvalue].toString()}");
+          printError("the error is ${result[mapvalue].toString()}");
           showErrorDialog(
             result[mapvalue],
             "user info exception",
@@ -241,7 +242,8 @@ class AuthController extends GetxController {
 
   changePasswordCon(GlobalKey<FormState> formKey) async {
     if (formKey.currentState!.validate()) {
-      Map data = {
+      isLoading.value = true;
+      Map<String, dynamic> data = {
         "currentPassword": password.value,
         "newPassword1": newPassword.value,
         "newPassword2": confirmPassword.value,
@@ -249,7 +251,16 @@ class AuthController extends GetxController {
       final result = await UseCaseProvider.instance()
           .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
           .updatePassword(data);
-          
+      if (result[mapKey] == successMapkey) {
+        Get.back();
+        isLoading.value = false;
+      } else {
+        isLoading.value = false;
+        showErrorDialog(
+          result[mapvalue],
+          "auth exception",
+        );
+      }
     }
   }
 

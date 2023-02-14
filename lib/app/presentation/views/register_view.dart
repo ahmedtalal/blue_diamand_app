@@ -595,7 +595,9 @@ class RegisterWorkAddressModel extends StatelessWidget {
               Expanded(
                 child: controller.isLoading.value == false
                     ? TextIconBtnSharedWidget(
-                        btnTitle: "Register",
+                        btnTitle: !controller.isLoading.value
+                            ? "Register"
+                            : "please wait....",
                         btnHeight: ScreenHandler.getScreenHeight(context) / 13,
                         btnWidth: ScreenHandler.getScreenWidth(context) / 2,
                         btnColor: AppColor.color2,

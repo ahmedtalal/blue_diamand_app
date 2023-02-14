@@ -56,4 +56,11 @@ class AuthModel extends AuthEntity {
           ResidentailAddress.toJson(model.residentailAddress!),
     };
   }
+
+  static Map<String, dynamic> loginToJson(AuthEntity model) {
+    return {
+      'email': model.email,
+      'password': model.password,
+    };
+  }
 }

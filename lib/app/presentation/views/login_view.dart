@@ -4,7 +4,6 @@ import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/presentation/controllers/auth_controller.dart';
 import 'package:drinking_app/app/core/utils/widgets/auth_links_shared_widget.dart';
-import 'package:drinking_app/app/presentation/views/main_view.dart';
 import 'package:drinking_app/app/presentation/widgets/auth_text_icon_widget.dart';
 import 'package:drinking_app/app/presentation/widgets/text_form_field_widget.dart';
 import 'package:drinking_app/app/core/utils/widgets/text_icon_btn_shared_widget.dart';
@@ -145,7 +144,9 @@ class LoginView extends StatelessWidget {
                               ),
                               const SizedBox(height: 25),
                               TextIconBtnSharedWidget(
-                                btnTitle: "Login",
+                                btnTitle: !controller.isLoading.value
+                                    ? "Login"
+                                    : "please wait....",
                                 btnHeight:
                                     ScreenHandler.getScreenHeight(context) / 13,
                                 btnWidth:
