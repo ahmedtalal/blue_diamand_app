@@ -12,7 +12,7 @@ class InternetController extends GetxController {
   }
 
   String internetResult = '';
-   checkInternetCon() {
-    InternetHandling.instance().checkInsternetConnection();
+  checkInternetCon() {
+    //InternetHandling.instance().checkInsternetConnection();
   }
 }

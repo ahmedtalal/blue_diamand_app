@@ -9,7 +9,6 @@ import 'package:drinking_app/app/presentation/widgets/text_form_field_widget.dar
 import 'package:drinking_app/app/core/utils/widgets/text_icon_btn_shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../data/services/local/theme_local_Storage.dart';
 
 class RegisterView extends StatelessWidget {

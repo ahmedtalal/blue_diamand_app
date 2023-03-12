@@ -15,7 +15,7 @@ class AppPages {
   static List<GetPage> pages = [
     GetPage(
       name: AppRoutes.splashScreenViewRout,
-      page: () => const SplashScreenview(),
+      page: () => const SplashScreenView(),
     ),
     GetPage(
       name: AppRoutes.loginviewRoute,

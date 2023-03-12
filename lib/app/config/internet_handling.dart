@@ -18,7 +18,6 @@ class InternetHandling {
         .onConnectivityChanged
         .listen((ConnectivityResult result) async{
           bool isConnect = await InternetConnectionChecker().hasConnection;
-          
         });
   }
 }

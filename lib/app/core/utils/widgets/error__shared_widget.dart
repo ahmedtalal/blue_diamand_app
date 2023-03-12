@@ -7,11 +7,11 @@ showErrorDialog(String message, String errortype) {
   return Get.snackbar(
     errortype,
     message,
+    margin: const EdgeInsets.all(0),
     snackPosition: SnackPosition.BOTTOM,
-    backgroundColor: AppColor.color2,
+    backgroundColor: Colors.red,
     colorText: Colors.white,
-    borderRadius: 15,
-    margin: const EdgeInsets.all(5),
+    borderRadius: 2,
     duration: const Duration(seconds: 4),
     isDismissible: true,
     forwardAnimationCurve: Curves.easeOutBack,
@@ -19,19 +19,17 @@ showErrorDialog(String message, String errortype) {
     messageText: Text(
       message,
       style: const TextStyle(
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: appFont,
         color: Colors.white,
-        fontWeight: FontWeight.bold,
       ),
     ),
-    titleText: const Text(
-      "auth Exception",
-      style: TextStyle(
-        fontSize: 20,
+    titleText: Text(
+      errortype,
+      style: const TextStyle(
+        fontSize: 16,
         fontFamily: appFont,
         color: Colors.black,
-        fontWeight: FontWeight.bold,
       ),
     ),
   );

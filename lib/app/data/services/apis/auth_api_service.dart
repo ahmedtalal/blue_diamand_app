@@ -1,7 +1,3 @@
-// ignore_for_file: avoid_print
-
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:drinking_app/app/config/dio_exceptions.dart';
 import 'package:drinking_app/app/core/utils/api_paths.dart';
@@ -31,7 +27,7 @@ class AuthApiService {
       String error = DioExceptions.dioErrorHandling(e);
       return failedRequest(responseBody: error);
     } catch (e) {
-      print("error from catch ");
+      printError("error from catch ");
       return failedRequest(responseBody: e.toString());
     }
   }
@@ -44,6 +40,7 @@ class AuthApiService {
           path: LOGIN_REQUEST_API_PATH, data: data);
       return successRequest(responseBody: response.data);
     } on DioError catch (e) {
+      printError("the error type is ${e.message}");
       String message = DioExceptions.dioErrorHandling(e);
       printError("the login dio error is $message");
       return failedRequest(responseBody: message);
@@ -79,7 +76,7 @@ class AuthApiService {
       printWarning("the user info is $userInfo");
       UserLocalEntity userData = UserLocalModel.fromJson(userInfo);
       //UserInfoLocalService.instance().convertStringToJson(userInfo);
-      print("the user json is $userData");
+      printInfo("the user json is $userData");
       String userToken = userData.userToken!;
       Options options =
           Options(headers: {"authorization": "Bearer $userToken"});

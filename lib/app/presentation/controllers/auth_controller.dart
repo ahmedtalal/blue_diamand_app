@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:drinking_app/app/core/utils/debug_prints.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/core/utils/widgets/error__shared_widget.dart';
@@ -24,8 +22,9 @@ class AuthController extends GetxController {
   var choiceRegisterSection = 1.obs;
 
   choiceRegisterModel(int registerSectionIndex, GlobalKey<FormState> formKey) {
+    choiceRegisterSection.value = registerSectionIndex;
     if (formKey.currentState!.validate()) {
-      choiceRegisterSection.value = registerSectionIndex;
+
     }
   }
 
@@ -236,7 +235,7 @@ class AuthController extends GetxController {
         .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
         .logOut();
     if (result) {
-      Get.offAll(() => const SplashScreenview());
+      Get.offAll(() => const SplashScreenView());
     }
   }
 

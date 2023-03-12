@@ -2,6 +2,7 @@ import 'package:drinking_app/app/config/screen_handler.dart';
 import 'package:drinking_app/app/config/validate_field.dart';
 import 'package:drinking_app/app/core/utils/app_colors.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
+import 'package:drinking_app/app/core/utils/testing_keys.dart';
 import 'package:drinking_app/app/presentation/controllers/auth_controller.dart';
 import 'package:drinking_app/app/core/utils/widgets/auth_links_shared_widget.dart';
 import 'package:drinking_app/app/presentation/widgets/auth_text_icon_widget.dart';
@@ -51,6 +52,7 @@ class LoginView extends StatelessWidget {
                   Row(
                     children: const [
                       Text(
+                        key:ValueKey(TestingKeys.LOGIN_TITLE_KEY),
                         "BLUE DIAMOND",
                         style: TextStyle(
                           fontSize: 20,
@@ -68,6 +70,7 @@ class LoginView extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const Text(
+                    key:ValueKey(TestingKeys.LOGIN_DESCRIPTION_KEY),
                     description,
                     style: TextStyle(
                       fontSize: 16,
@@ -76,6 +79,7 @@ class LoginView extends StatelessWidget {
                   ),
                   SizedBox(height: ScreenHandler.getScreenHeight(context) / 20),
                   const Text(
+                    key:ValueKey(TestingKeys.LOGIN_SUBTITIE_KEY),
                     "Login account",
                     style: TextStyle(
                       fontSize: 18,
@@ -86,11 +90,11 @@ class LoginView extends StatelessWidget {
                   GetX<AuthController>(
                       init: AuthController.instance,
                       builder: (controller) {
-                        if (controller.isLoading.value) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
+                        // if (controller.isLoading.value) {
+                        //   return const Center(
+                        //     child: CircularProgressIndicator(),
+                        //   );
+                        // }
                         return Form(
                           key: formKey,
                           child: Column(
@@ -100,6 +104,7 @@ class LoginView extends StatelessWidget {
                               const SizedBox(height: 20),
                               const SizedBox(height: 10),
                               TextFormFieldSharedWidget(
+                                key: const ValueKey(TestingKeys.LOGIN_EMAIL_FIELD_KEY),
                                 label: "email",
                                 hint: "email",
                                 textType: TextInputType.emailAddress,
@@ -113,6 +118,7 @@ class LoginView extends StatelessWidget {
                               ),
                               const SizedBox(height: 10),
                               TextFormFieldSharedWidget(
+                                key: const ValueKey(TestingKeys.LOGIN_PASSWORD_FIELD_KEY),
                                 label: "password",
                                 hint: "password",
                                 textType: TextInputType.phone,
@@ -132,6 +138,7 @@ class LoginView extends StatelessWidget {
                                 padding: const EdgeInsets.all(4),
                                 alignment: Alignment.centerRight,
                                 child: InkWell(
+                                  key: const ValueKey(TestingKeys.LOGIN_FORGETPASSWORD_BTN_KEY),
                                   onTap: () {},
                                   child: const Text(
                                     "Forget password ?",
@@ -144,6 +151,7 @@ class LoginView extends StatelessWidget {
                               ),
                               const SizedBox(height: 25),
                               TextIconBtnSharedWidget(
+                                key: const ValueKey(TestingKeys.LOGIN_BTN_KEY),
                                 btnTitle: !controller.isLoading.value
                                     ? "Login"
                                     : "please wait....",
@@ -161,6 +169,7 @@ class LoginView extends StatelessWidget {
                               ),
                               const SizedBox(height: 8),
                               AuthLinksSharedWidget(
+                                key: const ValueKey(TestingKeys.LOGIN_REGISTER_LINK_BTN_KEY),
                                 onClick: () {
                                   Get.back();
                                 },
@@ -174,6 +183,7 @@ class LoginView extends StatelessWidget {
                   SizedBox(height: ScreenHandler.getScreenHeight(context) / 24),
                   const Center(
                     child: Text(
+                      key:ValueKey(TestingKeys.LOGIN_ANOTHER_LOGIN_KEY),
                       "Or login with",
                       style: TextStyle(
                         fontSize: 17,
@@ -189,6 +199,7 @@ class LoginView extends StatelessWidget {
                         flex: 2,
                         child: Center(
                           child: AuthTextIconBtnWidget(
+                            key: const ValueKey(TestingKeys.LOGIN_USING_PHONE_NUMBER_KEY),
                             btnTitle: "Phone Number",
                             btnHeight:
                                 ScreenHandler.getScreenHeight(context) / 14,
@@ -207,6 +218,7 @@ class LoginView extends StatelessWidget {
                         flex: 2,
                         child: Center(
                           child: AuthTextIconBtnWidget(
+                            key: const ValueKey(TestingKeys.LOGIN_USING_GOOGLE_KEY),
                             btnTitle: "Google",
                             btnHeight:
                                 ScreenHandler.getScreenHeight(context) / 14,

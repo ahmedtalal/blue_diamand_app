@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.2
   get:
   get_storage:
@@ -19,6 +18,9 @@ dependencies:
   badges: ^2.0.3
   connectivity_plus: ^3.0.3
   internet_connection_checker: ^1.0.0+1
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -27,7 +29,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -60,3 +62,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true
