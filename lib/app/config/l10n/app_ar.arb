@@ -17,6 +17,7 @@
     "residentialAddress":"عنوان السكن",
     "street":"الشارع",
     "vilaName":"رقم البيت",
+    "vilaNumber":"vila number",
     "landMark":"الاند مارك",
     "type":"النوع",
     "nameOfContact":"الاسم من جهة الاتصال",
@@ -37,6 +38,11 @@
     "forgetPassword":"هل نسيت الرقم السري",
     "orLoginWith":"يمكنك التسجيل باستخدام حساب اخر",
     "phoneNumber":"رقم المحمول الخاص",
-    "google":"حساب جوجل"
+    "google":"حساب جوجل",
+    "pleaseEnterFullName":"please enter full name",
+    "enterTheDate":"enter the data",
+    "enterTheId":"enter the emirate id",
+    "landmark[e.g.behind xxx school]":"landmark[e.g.behind xxx school]",
+    "type[individual/group/family]":"type[individual/group/family]"
 
 }

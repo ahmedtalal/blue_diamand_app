@@ -34,7 +34,7 @@ class AuthModel extends AuthEntity {
       whatsappNumber: json['whatsappNumber'],
       workAddress: WorkAddress.fromJson(json['workAddress']),
       residentailAddress:
-          ResidentailAddress.fromJson(json['residentailAddress']),
+          ResidentailAddress.fromJson(json['residentialAddress']),
     );
   }
 
@@ -52,7 +52,7 @@ class AuthModel extends AuthEntity {
       'callNumber': model.callNumber,
       'whatsappNumber': model.whatsappNumber,
       'workAddress': WorkAddress.toJson(model.workAddress!),
-      'residentailAddress':
+      'residentialAddress':
           ResidentailAddress.toJson(model.residentailAddress!),
     };
   }

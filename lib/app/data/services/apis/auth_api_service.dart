@@ -38,6 +38,7 @@ class AuthApiService {
       printInfo("the login json is $data");
       Response response = await _curdApiHelper.postRequest(
           path: LOGIN_REQUEST_API_PATH, data: data);
+      printDone("the login success => ${response.data}");
       return successRequest(responseBody: response.data);
     } on DioError catch (e) {
       printError("the error type is ${e.message}");
@@ -52,6 +53,7 @@ class AuthApiService {
 
   bool checkIsUserLoginedService() {
     final result = UserInfoLocalService.instance().getUserInfo();
+    printInfo("the user info => $result");
     if (result[mapvalue] != "user not found") {
       return true;
     }
@@ -93,5 +95,21 @@ class AuthApiService {
     //   print("error from catch ");
     //   return failedRequest(responseBody: e.to);
     // }
+  }
+
+  Future<Map<String, dynamic>> forgetPasswordApiService(String email) async {
+    try {
+      Map<String, dynamic> data = {
+        "email": email,
+      };
+      Response response = await _curdApiHelper.postRequest(
+          path: POST_FORGET_PASSWORD_PATH, data: data);
+      return successRequest(responseBody: response.data);
+    } on DioError catch (error) {
+      String message = DioExceptions.dioErrorHandling(error);
+      return failedRequest(responseBody: message);
+    } catch (e) {
+      return failedRequest(responseBody: e.toString());
+    }
   }
 }

@@ -60,8 +60,8 @@ class User {
     birthdate = json['birthdate'];
     emiratesCity = json['emiratesCity'];
     area = json['area'];
-    residentailAddress = json['residentailAddress'] != null
-        ? ResidentailAddress.fromJson(json['residentailAddress'])
+    residentailAddress = json['residentialAddress'] != null
+        ? ResidentailAddress.fromJson(json['residentialAddress'])
         : null;
     workAddress = json['workAddress'] != null
         ? WorkAddress.fromJson(json['workAddress'])
@@ -87,7 +87,7 @@ class User {
     data['emiratesCity'] = emiratesCity;
     data['area'] = area;
     if (residentailAddress != null) {
-      data['residentailAddress'] = residentailAddress!.toJson();
+      data['residentialAddress'] = residentailAddress!.toJson();
     }
     if (workAddress != null) {
       data['workAddress'] = workAddress!.toJson();

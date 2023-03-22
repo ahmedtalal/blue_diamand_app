@@ -10,6 +10,7 @@ import 'package:drinking_app/app/core/utils/widgets/text_icon_btn_shared_widget.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/services/local/theme_local_Storage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
@@ -46,18 +47,18 @@ class RegisterView extends StatelessWidget {
                 children: [
                   const SizedBox(height: 15),
                   Row(
-                    children: const [
+                    children: [
                       Text(
-                        "BLUE DIAMOND",
-                        style: TextStyle(
+                        AppLocalizations.of(context)!.blueDiamond,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontFamily: appFont,
                           color: AppColor.color1,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(width: 10),
-                      Image(
+                      const SizedBox(width: 10),
+                      const Image(
                         image: AssetImage(diamondImg),
                         width: 25,
                       ),
@@ -72,9 +73,9 @@ class RegisterView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: ScreenHandler.getScreenHeight(context) / 20),
-                  const Text(
-                    "Register account",
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.registerAccount,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontFamily: appFont,
                     ),
@@ -129,17 +130,17 @@ class RegisterInformationModel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "(Information)",
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.information,
+            style: const TextStyle(
               fontSize: 25,
               fontFamily: appFont,
             ),
           ),
           const SizedBox(height: 20),
           TextFormFieldSharedWidget(
-            label: "full Name",
-            hint: "enter full name",
+            label: AppLocalizations.of(context)!.fullName,
+            hint: AppLocalizations.of(context)!.pleaseEnterFullName,
             textType: TextInputType.text,
             prefIcon: Icons.person,
             onChangeListenser: (String? newValue) {
@@ -152,8 +153,8 @@ class RegisterInformationModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "date",
-            hint: "enter the date",
+            label: AppLocalizations.of(context)!.date,
+            hint: AppLocalizations.of(context)!.enterTheDate,
             textType: TextInputType.datetime,
             prefIcon: Icons.date_range,
             onChangeListenser: (String? newValue) {
@@ -166,8 +167,8 @@ class RegisterInformationModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "emirates i'd",
-            hint: "enter the id",
+            label: AppLocalizations.of(context)!.emiratesId,
+            hint: AppLocalizations.of(context)!.emiratesId,
             textType: TextInputType.number,
             prefIcon: Icons.list_alt_rounded,
             onChangeListenser: (String? newValue) {
@@ -180,8 +181,8 @@ class RegisterInformationModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "nationality",
-            hint: "nationality",
+            label: AppLocalizations.of(context)!.nationality,
+            hint: AppLocalizations.of(context)!.nationality,
             textType: TextInputType.text,
             prefIcon: Icons.public,
             onChangeListenser: (String? newValue) {
@@ -194,8 +195,8 @@ class RegisterInformationModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "email address",
-            hint: "email address",
+            label: AppLocalizations.of(context)!.emailAddress,
+            hint: AppLocalizations.of(context)!.emailAddress,
             textType: TextInputType.emailAddress,
             prefIcon: Icons.email,
             onChangeListenser: controller.onChangeEmail,
@@ -206,8 +207,8 @@ class RegisterInformationModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "calling number",
-            hint: "calling number",
+            label: AppLocalizations.of(context)!.callingNumber,
+            hint: AppLocalizations.of(context)!.callingNumber,
             textType: TextInputType.phone,
             prefIcon: Icons.phone,
             onChangeListenser: (String? newValue) {
@@ -220,8 +221,8 @@ class RegisterInformationModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "what'sapp number",
-            hint: "what'sapp  number",
+            label: AppLocalizations.of(context)!.whatsAppNumber,
+            hint: AppLocalizations.of(context)!.whatsAppNumber,
             textType: TextInputType.phone,
             prefIcon: Icons.phone,
             onChangeListenser: (String? newValue) {
@@ -234,8 +235,8 @@ class RegisterInformationModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "emirates city",
-            hint: "emirates city",
+            label: AppLocalizations.of(context)!.emiratesCity,
+            hint: AppLocalizations.of(context)!.emiratesCity,
             textType: TextInputType.text,
             prefIcon: Icons.location_city,
             onChangeListenser: (String? newValue) {
@@ -248,8 +249,8 @@ class RegisterInformationModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "area",
-            hint: "area",
+            label: AppLocalizations.of(context)!.area,
+            hint: AppLocalizations.of(context)!.area,
             textType: TextInputType.text,
             prefIcon: Icons.location_on_sharp,
             onChangeListenser: (String? newValue) {
@@ -262,7 +263,7 @@ class RegisterInformationModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextIconBtnSharedWidget(
-            btnTitle: "Next step",
+            btnTitle: AppLocalizations.of(context)!.nextStep,
             btnHeight: ScreenHandler.getScreenHeight(context) / 13,
             btnWidth: ScreenHandler.getScreenWidth(context) / 2,
             btnColor: AppColor.color2,
@@ -281,8 +282,8 @@ class RegisterInformationModel extends StatelessWidget {
                 () => const LoginView(),
               );
             },
-            text: "Already have an account?",
-            textLink: "login",
+            text: AppLocalizations.of(context)!.alreadyHaveAnAccount,
+            textLink: AppLocalizations.of(context)!.login,
           ),
         ],
       ),
@@ -308,17 +309,17 @@ class RegisterResidentialAddressModel extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
-            "(Residential Address)",
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.residentialAddress,
+            style: const TextStyle(
               fontSize: 25,
               fontFamily: appFont,
             ),
           ),
           const SizedBox(height: 20),
           TextFormFieldSharedWidget(
-            label: "street",
-            hint: "street",
+            label: AppLocalizations.of(context)!.street,
+            hint: AppLocalizations.of(context)!.street,
             textType: TextInputType.text,
             prefIcon: Icons.location_on,
             onChangeListenser: (String? newValue) {
@@ -331,8 +332,8 @@ class RegisterResidentialAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "bidg/vila name",
-            hint: "bidg/vila name",
+            label: AppLocalizations.of(context)!.vilaName,
+            hint: AppLocalizations.of(context)!.vilaName,
             textType: TextInputType.text,
             prefIcon: Icons.villa,
             onChangeListenser: (String? newValue) {
@@ -345,8 +346,8 @@ class RegisterResidentialAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "bidg/vila number",
-            hint: "bidg/vila number",
+            label: AppLocalizations.of(context)!.villaNumber,
+            hint: AppLocalizations.of(context)!.villaNumber,
             textType: TextInputType.number,
             prefIcon: Icons.villa,
             onChangeListenser: (String? newValue) {
@@ -359,8 +360,8 @@ class RegisterResidentialAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "landmark",
-            hint: "landmark[e.g.behind xxx school]",
+            label: AppLocalizations.of(context)!.landMark,
+            hint: AppLocalizations.of(context)!.landmarkType,
             textType: TextInputType.text,
             prefIcon: Icons.location_on,
             onChangeListenser: (String? newValue) {
@@ -373,8 +374,8 @@ class RegisterResidentialAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "type",
-            hint: "type[individual/group/family]",
+            label: AppLocalizations.of(context)!.type,
+            hint: AppLocalizations.of(context)!.typeEx,
             textType: TextInputType.text,
             prefIcon: Icons.group_add,
             onChangeListenser: (String? newValue) {
@@ -387,8 +388,8 @@ class RegisterResidentialAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "name of contact",
-            hint: "name of contact person",
+            label: AppLocalizations.of(context)!.nameOfContact,
+            hint: AppLocalizations.of(context)!.nameOfContact,
             prefIcon: Icons.contact_mail_outlined,
             textType: TextInputType.text,
             onChangeListenser: (String? newValue) {
@@ -401,8 +402,8 @@ class RegisterResidentialAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "number of person",
-            hint: "number of person staying with you",
+            label: AppLocalizations.of(context)!.numberOfPerson,
+            hint: AppLocalizations.of(context)!.numberOfPerson,
             textType: TextInputType.number,
             prefIcon: Icons.person,
             onChangeListenser: (String? newValue) {
@@ -418,7 +419,7 @@ class RegisterResidentialAddressModel extends StatelessWidget {
             children: [
               Expanded(
                 child: TextIconBtnSharedWidget(
-                  btnTitle: "Back",
+                  btnTitle: AppLocalizations.of(context)!.area,
                   btnHeight: ScreenHandler.getScreenHeight(context) / 13,
                   btnWidth: ScreenHandler.getScreenWidth(context) / 2,
                   btnColor: AppColor.color1,
@@ -433,7 +434,7 @@ class RegisterResidentialAddressModel extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: TextIconBtnSharedWidget(
-                  btnTitle: "Next step",
+                  btnTitle: AppLocalizations.of(context)!.nextStep,
                   btnHeight: ScreenHandler.getScreenHeight(context) / 13,
                   btnWidth: ScreenHandler.getScreenWidth(context) / 2,
                   btnColor: AppColor.color2,
@@ -455,8 +456,8 @@ class RegisterResidentialAddressModel extends StatelessWidget {
                 () => const LoginView(),
               );
             },
-            text: "Already have an account?",
-            textLink: "login",
+            text: AppLocalizations.of(context)!.alreadyHaveAnAccount,
+            textLink: AppLocalizations.of(context)!.area,
           ),
         ],
       ),
@@ -482,17 +483,17 @@ class RegisterWorkAddressModel extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
-            "(WorkAddressModel)",
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.workAddressModel,
+            style: const TextStyle(
               fontSize: 25,
               fontFamily: appFont,
             ),
           ),
           const SizedBox(height: 20),
           TextFormFieldSharedWidget(
-            label: "workhouse",
-            hint: "shop/office/workhouse name",
+            label: AppLocalizations.of(context)!.workhouse,
+            hint: AppLocalizations.of(context)!.workhouse,
             textType: TextInputType.text,
             prefIcon: Icons.shop,
             onChangeListenser: (String? newValue) {
@@ -505,8 +506,8 @@ class RegisterWorkAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           TextFormFieldSharedWidget(
-            label: "workhouse Number",
-            hint: "shop/office/workhouse number",
+            label: AppLocalizations.of(context)!.workhouseNumber,
+            hint: AppLocalizations.of(context)!.workhouseNumber,
             textType: TextInputType.number,
             prefIcon: Icons.shop,
             onChangeListenser: (String? newValue) {
@@ -519,8 +520,8 @@ class RegisterWorkAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "contact person",
-            hint: "contact person name",
+            label: AppLocalizations.of(context)!.nameOfContact,
+            hint: AppLocalizations.of(context)!.nameOfContact,
             textType: TextInputType.text,
             prefIcon: Icons.contact_mail,
             onChangeListenser: (String? newValue) {
@@ -533,8 +534,8 @@ class RegisterWorkAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "staff",
-            hint: "number of staff",
+            label: AppLocalizations.of(context)!.staff,
+            hint: AppLocalizations.of(context)!.staff,
             textType: TextInputType.number,
             prefIcon: Icons.group,
             onChangeListenser: (String? newValue) {
@@ -547,8 +548,8 @@ class RegisterWorkAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "username",
-            hint: "username",
+            label: AppLocalizations.of(context)!.username,
+            hint: AppLocalizations.of(context)!.username,
             textType: TextInputType.text,
             prefIcon: Icons.person,
             onChangeListenser: (String? newValue) {
@@ -561,8 +562,8 @@ class RegisterWorkAddressModel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormFieldSharedWidget(
-            label: "password",
-            hint: "password",
+            label: AppLocalizations.of(context)!.password,
+            hint: AppLocalizations.of(context)!.password,
             textType: TextInputType.visiblePassword,
             prefIcon: Icons.lock,
             onChangeListenser: (String? newValue) {
@@ -578,7 +579,7 @@ class RegisterWorkAddressModel extends StatelessWidget {
             children: [
               Expanded(
                 child: TextIconBtnSharedWidget(
-                  btnTitle: "Back",
+                  btnTitle: AppLocalizations.of(context)!.back,
                   btnHeight: ScreenHandler.getScreenHeight(context) / 13,
                   btnWidth: ScreenHandler.getScreenWidth(context) / 2,
                   btnColor: AppColor.color1,
@@ -595,7 +596,7 @@ class RegisterWorkAddressModel extends StatelessWidget {
                 child: controller.isLoading.value == false
                     ? TextIconBtnSharedWidget(
                         btnTitle: !controller.isLoading.value
-                            ? "Register"
+                            ? AppLocalizations.of(context)!.register1
                             : "please wait....",
                         btnHeight: ScreenHandler.getScreenHeight(context) / 13,
                         btnWidth: ScreenHandler.getScreenWidth(context) / 2,
@@ -620,8 +621,8 @@ class RegisterWorkAddressModel extends StatelessWidget {
                 () => const LoginView(),
               );
             },
-            text: "Already have an account?",
-            textLink: "login",
+            text: AppLocalizations.of(context)!.alreadyHaveAnAccount,
+            textLink: AppLocalizations.of(context)!.login,
           ),
         ],
       ),

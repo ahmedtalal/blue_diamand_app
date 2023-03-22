@@ -17,6 +17,7 @@
     "residentialAddress":"Residential Address",
     "street":"street",
     "vilaName":"vila name",
+    "villaNumber":"vila number",
     "landMark":"landMark",
     "type":"type",
     "nameOfContact":"nameOfContact",
@@ -37,6 +38,12 @@
     "forgetPassword":"Forget password ?",
     "orLoginWith":"Or login with",
     "phoneNumber":"Phone Number",
-    "google":"Google"
+    "google":"Google",
+    "pleaseEnterFullName":"please enter full name",
+    "enterTheDate":"enter the data",
+    "enterTheId":"enter the emirate id",
+    "landmarkType":"landmark[e.g.behind xxx school]",
+    "typeEx":"type[individual/group/family]"
+
 
 }

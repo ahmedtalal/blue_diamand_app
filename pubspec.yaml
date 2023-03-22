@@ -21,6 +21,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+  flutter_screenutil: ^5.7.0
 
 dev_dependencies:
   flutter_test:

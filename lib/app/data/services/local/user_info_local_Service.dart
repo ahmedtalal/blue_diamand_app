@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:drinking_app/app/core/utils/debug_prints.dart';
 import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/data/models/user_local_model.dart';
 import 'package:drinking_app/app/domain/entities/user_local_entity.dart';
-import 'package:get/utils.dart';
 import 'package:get_storage/get_storage.dart';
 
 class UserInfoLocalService {

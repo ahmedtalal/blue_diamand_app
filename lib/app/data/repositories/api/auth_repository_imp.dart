@@ -14,9 +14,8 @@ class AuthRepositoryImp implements IAuthRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> forgetPassword(var data) {
-    // TODO: implement forgetPassword
-    throw UnimplementedError();
+  Future<Map<String, dynamic>> forgetPassword(var data) async {
+    return await AuthApiService.instance.forgetPasswordApiService(data);
   }
 
   @override

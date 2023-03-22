@@ -1,6 +1,6 @@
 class UserLocalEntity {
-  String? userToken, userId;
-  int? userExpire;
+  String? userToken;
+  int? userExpire, userId;
 
   UserLocalEntity({
     this.userToken,

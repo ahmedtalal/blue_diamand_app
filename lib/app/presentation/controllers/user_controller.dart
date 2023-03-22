@@ -25,7 +25,7 @@ class UserController extends GetxController {
   var phone = "".obs;
   var address = "".obs;
   var isVisible = false.obs;
-  var isWorkModelVisible = false.obs;
+  RxBool isWorkModelVisible = false.obs;
 
   onChangeUserName(String? newValue) {
     userName.value = newValue!;
@@ -60,18 +60,24 @@ class UserController extends GetxController {
   }
 
   getUserInfoCon() async {
-    isLoading.value = true;
-    final result = UserInfoLocalService.instance().getUserInfo();
-    UserLocalModel userLocalModel = UserLocalModel.fromJson(result);
-    String userId = userLocalModel.userId!;
-    final data = await UseCaseProvider.instance()
-        .creator<UserRepositoryImp>(UserRepositoryImp.instance())
-        .getUserModel(userId);
-    if (data[mapKey] == successMapkey) {
-      printDone("the user model is ${data[mapvalue].user!.fullName!}");
-      onChageUserModel(data[mapvalue]);
-      isLoading.value = false;
-    } else {
+    try {
+      isLoading.value = true;
+      final result = UserInfoLocalService.instance().getUserInfo();
+      UserLocalModel userLocalModel = UserLocalModel.fromJson(result);
+      printInfo("the user from local storage => $result");
+      int userId = userLocalModel.userId!;
+      printDone("the user id is => $userId");
+      final data = await UseCaseProvider.instance()
+          .creator<UserRepositoryImp>(UserRepositoryImp.instance())
+          .getUserModel(userId);
+      if (data[mapKey] == successMapkey) {
+        printDone("the user model is ${data[mapvalue].user!.fullName!}");
+        onChageUserModel(data[mapvalue]);
+        isLoading.value = false;
+      } else {
+        isLoading.value = false;
+      }
+    } catch (e) {
       isLoading.value = false;
     }
   }

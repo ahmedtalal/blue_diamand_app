@@ -16,10 +16,10 @@ class UserApiServices {
     return _userApiServices!;
   }
 
-  Future<Map<String, dynamic>> getUserModelService(String userId) async {
+  Future<Map<String, dynamic>> getUserModelService(int userId) async {
     try {
       Response response = await CurdApiHelper.instance
-          .getRequest(path: GET_USER_MODEL_API_PATH + userId);
+          .getRequest(path: GET_USER_MODEL_API_PATH + "$userId".toString());
       printDone(
           "the get user info is ${UserInfoModel.fromJson(response.data).user!.fullName!}");
       return successRequest(

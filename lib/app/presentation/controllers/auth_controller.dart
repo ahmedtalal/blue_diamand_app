@@ -9,7 +9,9 @@ import 'package:drinking_app/app/domain/entities/residential_address.dart';
 import 'package:drinking_app/app/domain/entities/work_address.dart';
 import 'package:drinking_app/app/domain/usecases/usecase_provider.dart';
 import 'package:drinking_app/app/presentation/routes/app_routes.dart';
+import 'package:drinking_app/app/presentation/views/login_view.dart';
 import 'package:drinking_app/app/presentation/views/main_view.dart';
+import 'package:drinking_app/app/presentation/views/register_view.dart';
 import 'package:drinking_app/app/presentation/views/splash_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,9 +24,8 @@ class AuthController extends GetxController {
   var choiceRegisterSection = 1.obs;
 
   choiceRegisterModel(int registerSectionIndex, GlobalKey<FormState> formKey) {
-    choiceRegisterSection.value = registerSectionIndex;
     if (formKey.currentState!.validate()) {
-
+      choiceRegisterSection.value = registerSectionIndex;
     }
   }
 
@@ -52,7 +53,7 @@ class AuthController extends GetxController {
   var landMark = ''.obs;
   var newPassword = ''.obs;
   var confirmPassword = ''.obs;
-  var isLoading = false.obs;
+  RxBool isLoading = false.obs;
 
   onChangeUserName(String? newValue) {
     userName.value = newValue!;
@@ -151,74 +152,91 @@ class AuthController extends GetxController {
   }
 
   onClickRegister(GlobalKey<FormState> key) async {
-    if (key.currentState!.validate()) {
-      isLoading.value = true;
-      final result = await UseCaseProvider.instance()
-          .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
-          .register(prepareModel());
-      if (result[mapKey].toString() == successMapkey) {
-        printDone("the response body is ${result[mapvalue].toString()}");
-        // this line to save user info in local storage
-        final userInfo = await UseCaseProvider.instance()
-            .creator<UserInfoLocalService>(UserInfoLocalService.instance())
-            .saveUserInfo(result[mapvalue]);
-        if (userInfo[mapKey].toString() == successMapkey) {
-          Get.to(
-            () => const MainView(),
-          );
+    try {
+      if (key.currentState!.validate()) {
+        isLoading.value = true;
+        final result = await UseCaseProvider.instance()
+            .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
+            .register(prepareModel());
+        if (result[mapKey].toString() == successMapkey) {
+          printDone("the response body is ${result[mapvalue].toString()}");
+          // this line to save user info in local storage
+          final userInfo = await UseCaseProvider.instance()
+              .creator<UserInfoLocalService>(UserInfoLocalService.instance())
+              .saveUserInfo(result[mapvalue]);
+          if (userInfo[mapKey].toString() == successMapkey) {
+            Get.to(
+              () => const RegisterView(),
+            );
+          } else {
+            printError("the error is ${result[mapvalue].toString()}");
+            showErrorDialog(
+              result[mapvalue],
+              "user info exception",
+            );
+          }
+          isLoading.value = false;
         } else {
+          isLoading.value = false;
           printError("the error is ${result[mapvalue].toString()}");
           showErrorDialog(
             result[mapvalue],
-            "user info exception",
+            "auth exception",
           );
         }
-        isLoading.value = false;
-      } else {
-        isLoading.value = false;
-        printError("the error is ${result[mapvalue].toString()}");
-        showErrorDialog(
-          result[mapvalue],
-          "auth exception",
-        );
       }
+    } catch (e) {
+      isLoading.value = false;
+      printError("the error is ${e.toString()}");
+      showErrorDialog(
+        e.toString(),
+        "auth exception",
+      );
     }
   }
 
   onClickLogin(GlobalKey<FormState> key) async {
-    if (key.currentState!.validate()) {
-      AuthEntity authEntity = AuthModel(
-        email: email.value,
-        password: password.value,
-      );
-      isLoading.value = true;
-      final result = await UseCaseProvider.instance()
-          .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
-          .login(authEntity);
-      if (result[mapKey].toString() == successMapkey) {
-        // this line to save user info in local storage
-        final userInfo = await UseCaseProvider.instance()
-            .creator<UserInfoLocalService>(UserInfoLocalService.instance())
-            .saveUserInfo(result[mapvalue]);
-        if (userInfo[mapKey].toString() == successMapkey) {
-          Get.to(
-            () => const MainView(),
-          );
+    try {
+      if (key.currentState!.validate()) {
+        AuthEntity authEntity = AuthModel(
+          email: email.value,
+          password: password.value,
+        );
+        isLoading.value = true;
+        final result = await UseCaseProvider.instance()
+            .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
+            .login(authEntity);
+        if (result[mapKey].toString() == successMapkey) {
+          // this line to save user info in local storage
+          final userInfo = await UseCaseProvider.instance()
+              .creator<UserInfoLocalService>(UserInfoLocalService.instance())
+              .saveUserInfo(result[mapvalue]);
+          if (userInfo[mapKey].toString() == successMapkey) {
+            Get.to(
+              () => const MainView(),
+            );
+          } else {
+            printError("the error is ${result[mapvalue].toString()}");
+            showErrorDialog(
+              result[mapvalue],
+              "user info exception",
+            );
+          }
+          isLoading.value = false;
         } else {
-          printError("the error is ${result[mapvalue].toString()}");
+          isLoading.value = false;
           showErrorDialog(
             result[mapvalue],
-            "user info exception",
+            "auth exception",
           );
         }
-        isLoading.value = false;
-      } else {
-        isLoading.value = false;
-        showErrorDialog(
-          result[mapvalue],
-          "auth exception",
-        );
       }
+    } catch (e) {
+      isLoading.value = false;
+      showErrorDialog(
+        e.toString(),
+        "auth exception",
+      );
     }
   }
 
@@ -240,26 +258,65 @@ class AuthController extends GetxController {
   }
 
   changePasswordCon(GlobalKey<FormState> formKey) async {
-    if (formKey.currentState!.validate()) {
-      isLoading.value = true;
-      Map<String, dynamic> data = {
-        "currentPassword": password.value,
-        "newPassword1": newPassword.value,
-        "newPassword2": confirmPassword.value,
-      };
-      final result = await UseCaseProvider.instance()
-          .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
-          .updatePassword(data);
-      if (result[mapKey] == successMapkey) {
-        Get.back();
-        isLoading.value = false;
-      } else {
-        isLoading.value = false;
-        showErrorDialog(
-          result[mapvalue],
-          "auth exception",
-        );
+    try {
+      if (formKey.currentState!.validate()) {
+        isLoading.value = true;
+        Map<String, dynamic> data = {
+          "currentPassword": password.value,
+          "newPassword1": newPassword.value,
+          "newPassword2": confirmPassword.value,
+        };
+        final result = await UseCaseProvider.instance()
+            .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
+            .updatePassword(data);
+        if (result[mapKey] == successMapkey) {
+          Get.back();
+          isLoading.value = false;
+        } else {
+          isLoading.value = false;
+          showErrorDialog(
+            result[mapvalue],
+            "auth exception",
+          );
+        }
       }
+    } catch (e) {
+      isLoading.value = false;
+      showErrorDialog(
+        e.toString(),
+        "auth exception",
+      );
+    }
+  }
+
+  forgetPasswordCon(GlobalKey<FormState> formKey) async {
+    try {
+      if (formKey.currentState!.validate()) {
+        isLoading.value = true;
+        final result = await UseCaseProvider.instance()
+            .creator<AuthRepositoryImp>(AuthRepositoryImp.instance)
+            .forgetPassword(email.value);
+        if (result[mapKey] == "success") {
+          isLoading.value = false;
+          showErrorDialog(
+            result[mapvalue],
+            "Messsage",
+          );
+          Get.back();
+        } else {
+          isLoading.value = false;
+          showErrorDialog(
+            result[mapvalue],
+            "Error",
+          );
+        }
+      }
+    } catch (e) {
+      isLoading.value = false;
+      showErrorDialog(
+        e.toString(),
+        "Error",
+      );
     }
   }
 

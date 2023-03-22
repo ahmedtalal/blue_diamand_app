@@ -36,3 +36,4 @@ const String waterImg = "assets/images/waterimage.jpeg";
 const String profleImg = "assets/images/profilebacground.jpeg";
 const String notiBackground = "assets/images/notificationbackground.png";
 const String cameraBtn = "assets/images/camera.png";
+const String emptyImg = "assets/images/emptydata.jpg";

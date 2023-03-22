@@ -5,13 +5,14 @@ import 'package:drinking_app/app/core/utils/strings.dart';
 import 'package:drinking_app/app/core/utils/testing_keys.dart';
 import 'package:drinking_app/app/presentation/controllers/auth_controller.dart';
 import 'package:drinking_app/app/core/utils/widgets/auth_links_shared_widget.dart';
+import 'package:drinking_app/app/presentation/views/forget_password_view.dart';
 import 'package:drinking_app/app/presentation/widgets/auth_text_icon_widget.dart';
 import 'package:drinking_app/app/presentation/widgets/text_form_field_widget.dart';
 import 'package:drinking_app/app/core/utils/widgets/text_icon_btn_shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../data/services/local/theme_local_Storage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginView extends StatelessWidget {
   static GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -50,19 +51,19 @@ class LoginView extends StatelessWidget {
                 children: [
                   const SizedBox(height: 15),
                   Row(
-                    children: const [
+                    children: [
                       Text(
-                        key:ValueKey(TestingKeys.LOGIN_TITLE_KEY),
-                        "BLUE DIAMOND",
-                        style: TextStyle(
+                        key: const ValueKey(TestingKeys.LOGIN_TITLE_KEY),
+                        AppLocalizations.of(context)!.blueDiamond,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontFamily: appFont,
                           color: AppColor.color1,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(width: 10),
-                      Image(
+                      const SizedBox(width: 10),
+                      const Image(
                         image: AssetImage(diamondImg),
                         width: 25,
                       ),
@@ -70,7 +71,7 @@ class LoginView extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    key:ValueKey(TestingKeys.LOGIN_DESCRIPTION_KEY),
+                    key: ValueKey(TestingKeys.LOGIN_DESCRIPTION_KEY),
                     description,
                     style: TextStyle(
                       fontSize: 16,
@@ -78,10 +79,10 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: ScreenHandler.getScreenHeight(context) / 20),
-                  const Text(
-                    key:ValueKey(TestingKeys.LOGIN_SUBTITIE_KEY),
-                    "Login account",
-                    style: TextStyle(
+                  Text(
+                    key: const ValueKey(TestingKeys.LOGIN_SUBTITIE_KEY),
+                    AppLocalizations.of(context)!.loginAccount,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontFamily: appFont,
                     ),
@@ -104,9 +105,12 @@ class LoginView extends StatelessWidget {
                               const SizedBox(height: 20),
                               const SizedBox(height: 10),
                               TextFormFieldSharedWidget(
-                                key: const ValueKey(TestingKeys.LOGIN_EMAIL_FIELD_KEY),
-                                label: "email",
-                                hint: "email",
+                                key: const ValueKey(
+                                    TestingKeys.LOGIN_EMAIL_FIELD_KEY),
+                                label:
+                                    AppLocalizations.of(context)!.emailAddress,
+                                hint:
+                                    AppLocalizations.of(context)!.emailAddress,
                                 textType: TextInputType.emailAddress,
                                 prefIcon: Icons.email,
                                 onChangeListenser: controller.onChangeEmail,
@@ -118,9 +122,10 @@ class LoginView extends StatelessWidget {
                               ),
                               const SizedBox(height: 10),
                               TextFormFieldSharedWidget(
-                                key: const ValueKey(TestingKeys.LOGIN_PASSWORD_FIELD_KEY),
-                                label: "password",
-                                hint: "password",
+                                key: const ValueKey(
+                                    TestingKeys.LOGIN_PASSWORD_FIELD_KEY),
+                                label: AppLocalizations.of(context)!.password,
+                                hint: AppLocalizations.of(context)!.password,
                                 textType: TextInputType.phone,
                                 prefIcon: Icons.lock,
                                 onChangeListenser: (String? newValue) {
@@ -138,11 +143,15 @@ class LoginView extends StatelessWidget {
                                 padding: const EdgeInsets.all(4),
                                 alignment: Alignment.centerRight,
                                 child: InkWell(
-                                  key: const ValueKey(TestingKeys.LOGIN_FORGETPASSWORD_BTN_KEY),
-                                  onTap: () {},
-                                  child: const Text(
-                                    "Forget password ?",
-                                    style: TextStyle(
+                                  key: const ValueKey(
+                                      TestingKeys.LOGIN_FORGETPASSWORD_BTN_KEY),
+                                  onTap: () {
+                                    Get.to(() => const ForgetPasswordView());
+                                  },
+                                  child: Text(
+                                    AppLocalizations.of(context)!
+                                        .forgetPassword,
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontFamily: appFont,
                                     ),
@@ -153,7 +162,7 @@ class LoginView extends StatelessWidget {
                               TextIconBtnSharedWidget(
                                 key: const ValueKey(TestingKeys.LOGIN_BTN_KEY),
                                 btnTitle: !controller.isLoading.value
-                                    ? "Login"
+                                    ? AppLocalizations.of(context)!.login
                                     : "please wait....",
                                 btnHeight:
                                     ScreenHandler.getScreenHeight(context) / 13,
@@ -169,23 +178,26 @@ class LoginView extends StatelessWidget {
                               ),
                               const SizedBox(height: 8),
                               AuthLinksSharedWidget(
-                                key: const ValueKey(TestingKeys.LOGIN_REGISTER_LINK_BTN_KEY),
+                                key: const ValueKey(
+                                    TestingKeys.LOGIN_REGISTER_LINK_BTN_KEY),
                                 onClick: () {
                                   Get.back();
                                 },
-                                text: "Do not have an account?",
-                                textLink: "register",
+                                text: AppLocalizations.of(context)!
+                                    .doNotHaveAnAccount,
+                                textLink:
+                                    AppLocalizations.of(context)!.register1,
                               ),
                             ],
                           ),
                         );
                       }),
                   SizedBox(height: ScreenHandler.getScreenHeight(context) / 24),
-                  const Center(
+                  Center(
                     child: Text(
-                      key:ValueKey(TestingKeys.LOGIN_ANOTHER_LOGIN_KEY),
-                      "Or login with",
-                      style: TextStyle(
+                      key: const ValueKey(TestingKeys.LOGIN_ANOTHER_LOGIN_KEY),
+                      AppLocalizations.of(context)!.orLoginWith,
+                      style: const TextStyle(
                         fontSize: 17,
                         fontFamily: appFont,
                         color: AppColor.color1,
@@ -199,8 +211,9 @@ class LoginView extends StatelessWidget {
                         flex: 2,
                         child: Center(
                           child: AuthTextIconBtnWidget(
-                            key: const ValueKey(TestingKeys.LOGIN_USING_PHONE_NUMBER_KEY),
-                            btnTitle: "Phone Number",
+                            key: const ValueKey(
+                                TestingKeys.LOGIN_USING_PHONE_NUMBER_KEY),
+                            btnTitle: AppLocalizations.of(context)!.phoneNumber,
                             btnHeight:
                                 ScreenHandler.getScreenHeight(context) / 14,
                             btnWidth:
@@ -218,8 +231,9 @@ class LoginView extends StatelessWidget {
                         flex: 2,
                         child: Center(
                           child: AuthTextIconBtnWidget(
-                            key: const ValueKey(TestingKeys.LOGIN_USING_GOOGLE_KEY),
-                            btnTitle: "Google",
+                            key: const ValueKey(
+                                TestingKeys.LOGIN_USING_GOOGLE_KEY),
+                            btnTitle: AppLocalizations.of(context)!.google,
                             btnHeight:
                                 ScreenHandler.getScreenHeight(context) / 14,
                             btnWidth:

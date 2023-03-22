@@ -20,8 +20,8 @@ class UserProfileView extends StatefulWidget {
 class _UserProfileViewState extends State<UserProfileView> {
   @override
   void initState() {
-    UserController.instance().getUserInfoCon();
     super.initState();
+    UserController.instance().getUserInfoCon();
   }
 
   @override
@@ -36,6 +36,9 @@ class _UserProfileViewState extends State<UserProfileView> {
         scrollDirection: Axis.vertical,
         child: GetX<UserController>(
           init: UserController.instance(),
+          initState: (state) {
+            UserController.instance().getUserInfoCon();
+          },
           builder: (controller) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
