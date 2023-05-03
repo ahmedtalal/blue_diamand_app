@@ -5,3 +5,4 @@ const String LOGIN_REQUEST_API_PATH = "user/login/";
 const String REGISTER_REQUEST_API_PATH = "user/create/";
 const String GET_USER_MODEL_API_PATH = "user/";
 const String POST_FORGET_PASSWORD_PATH = "user/forget-password";
+const String CREATE_PRODUCT_REAUEST_PATH ="product/create";

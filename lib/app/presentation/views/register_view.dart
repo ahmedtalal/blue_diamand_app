@@ -14,7 +14,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
-  static GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  static GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
+  static GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
+  static GlobalKey<FormState> formKey3 = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,17 +88,17 @@ class RegisterView extends StatelessWidget {
                     builder: (controller) {
                       if (controller.choiceRegisterSection.value == 1) {
                         return RegisterInformationModel(
-                          formKey: formKey,
+                          formKey: formKey1,
                           controller: controller,
                         );
                       } else if (controller.choiceRegisterSection.value == 2) {
                         return RegisterResidentialAddressModel(
-                          formKey: formKey,
+                          formKey: formKey2,
                           controller: controller,
                         );
                       } else {
                         return RegisterWorkAddressModel(
-                          formKey: formKey,
+                          formKey: formKey3,
                           controller: controller,
                         );
                       }
@@ -419,13 +421,13 @@ class RegisterResidentialAddressModel extends StatelessWidget {
             children: [
               Expanded(
                 child: TextIconBtnSharedWidget(
-                  btnTitle: AppLocalizations.of(context)!.area,
+                  btnTitle: AppLocalizations.of(context)!.back,
                   btnHeight: ScreenHandler.getScreenHeight(context) / 13,
                   btnWidth: ScreenHandler.getScreenWidth(context) / 2,
                   btnColor: AppColor.color1,
                   btnRaduis: 12,
                   onClick: () {
-                    controller.choiceRegisterSection.value = 1;
+                    controller.choiceRegisterModel(1, formKey);
                   },
                   icon: Icons.keyboard_arrow_left_outlined,
                   iconColor: Colors.white,
@@ -595,9 +597,7 @@ class RegisterWorkAddressModel extends StatelessWidget {
               Expanded(
                 child: controller.isLoading.value == false
                     ? TextIconBtnSharedWidget(
-                        btnTitle: !controller.isLoading.value
-                            ? AppLocalizations.of(context)!.register1
-                            : "please wait....",
+                        btnTitle: AppLocalizations.of(context)!.register1,
                         btnHeight: ScreenHandler.getScreenHeight(context) / 13,
                         btnWidth: ScreenHandler.getScreenWidth(context) / 2,
                         btnColor: AppColor.color2,

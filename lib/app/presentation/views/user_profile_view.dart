@@ -142,7 +142,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                               hint: "nationality",
                               textType: TextInputType.text,
                               prefIcon: Icons.public,
-                              onChangeListenser: controller.onChangeAdress,
+                              onChangeListenser: controller.onChangeAddress,
                               onValidateListenser: (String? value) {
                                 return ValidateField.instance()
                                     .validateField(value!);
@@ -158,7 +158,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                               hint: "emirate city",
                               textType: TextInputType.text,
                               prefIcon: Icons.public,
-                              onChangeListenser: controller.onChangeAdress,
+                              onChangeListenser: controller.onChangeAddress,
                               onValidateListenser: (String? value) {
                                 return ValidateField.instance()
                                     .validateField(value!);
@@ -174,7 +174,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                               hint: "emirate id",
                               textType: TextInputType.text,
                               prefIcon: Icons.list_alt_rounded,
-                              onChangeListenser: controller.onChangeAdress,
+                              onChangeListenser: controller.onChangeAddress,
                               onValidateListenser: (String? value) {
                                 return ValidateField.instance()
                                     .validateField(value!);
@@ -190,7 +190,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                               hint: "birthdate",
                               textType: TextInputType.text,
                               prefIcon: Icons.date_range,
-                              onChangeListenser: controller.onChangeAdress,
+                              onChangeListenser: controller.onChangeAddress,
                               onValidateListenser: (String? value) {
                                 return ValidateField.instance()
                                     .validateField(value!);
@@ -206,7 +206,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                               hint: "area",
                               textType: TextInputType.text,
                               prefIcon: Icons.public,
-                              onChangeListenser: controller.onChangeAdress,
+                              onChangeListenser: controller.onChangeAddress,
                               onValidateListenser: (String? value) {
                                 return ValidateField.instance()
                                     .validateField(value!);
@@ -268,7 +268,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    controller.onShowWorkAdressOrNot();
+                                    controller.onShowWorkAddressOrNot();
                                   },
                                   child: Icon(
                                     !controller.isWorkModelVisible.value

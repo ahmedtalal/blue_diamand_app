@@ -4,7 +4,7 @@ import 'package:drinking_app/app/data/models/user_info_model.dart';
 import 'package:drinking_app/app/data/models/user_local_model.dart';
 import 'package:drinking_app/app/data/repositories/api/user_repository_imp.dart';
 import 'package:drinking_app/app/data/services/local/user_info_local_Service.dart';
-import 'package:drinking_app/app/domain/usecases/usecase_provider.dart';
+import 'package:drinking_app/app/domain/usecases/user_usecase_provider.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
@@ -43,11 +43,11 @@ class UserController extends GetxController {
     phone.value = newValue!;
   }
 
-  onChangeAdress(String? newValue) {
+  onChangeAddress(String? newValue) {
     address.value = newValue!;
   }
 
-  onChageUserModel(UserInfoModel model) {
+  onChangeUserModel(UserInfoModel model) {
     userInfoModel.value = model;
   }
 
@@ -55,7 +55,7 @@ class UserController extends GetxController {
     isVisible.value = !isVisible.value;
   }
 
-  onShowWorkAdressOrNot() {
+  onShowWorkAddressOrNot() {
     isWorkModelVisible.value = !isWorkModelVisible.value;
   }
 
@@ -64,15 +64,15 @@ class UserController extends GetxController {
       isLoading.value = true;
       final result = UserInfoLocalService.instance().getUserInfo();
       UserLocalModel userLocalModel = UserLocalModel.fromJson(result);
-      printInfo("the user from local storage => $result");
+      printInfo("the user from local storage => $result}");
       int userId = userLocalModel.userId!;
       printDone("the user id is => $userId");
-      final data = await UseCaseProvider.instance()
+      final data = await UserUseCaseProvider.instance()
           .creator<UserRepositoryImp>(UserRepositoryImp.instance())
           .getUserModel(userId);
       if (data[mapKey] == successMapkey) {
         printDone("the user model is ${data[mapvalue].user!.fullName!}");
-        onChageUserModel(data[mapvalue]);
+        onChangeUserModel(data[mapvalue]);
         isLoading.value = false;
       } else {
         isLoading.value = false;

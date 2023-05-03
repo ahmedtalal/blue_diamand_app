@@ -8,9 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
 
-class NavBarWidget extends StatelessWidget {
+class NavBarWidget extends StatefulWidget {
   const NavBarWidget({super.key});
 
+  @override
+  State<NavBarWidget> createState() => _NavBarWidgetState();
+}
+
+class _NavBarWidgetState extends State<NavBarWidget> {
+  @override
+  void initState() {
+    UserController.instance().getUserInfoCon();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -23,7 +33,7 @@ class NavBarWidget extends StatelessWidget {
                 state.controller!.getUserInfoCon();
               },
               builder: (controller) {
-                if (controller.isLoading.value == true) {
+                if (controller.isLoading.value == false) {
                   return const UserAccountsDrawerHeader(
                     accountName: Text(
                       "example",
